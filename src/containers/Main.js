@@ -1,27 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { currentUser } from '../actions/auth_actions';
+import { getCurrentUser } from '../actions/auth_actions';
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
 
+    if (localStorage.length === 0) {
+      props.history.push('/login');
     }
   }
 
   componentDidMount() {
     if (localStorage.getItem('token') && !this.props.auth.isLoggedIn) {
-      this.props.currentUser();
+      this.props.getCurrentUser();
     }
   }
 
   render() {
     return (
       <div>
-        <h2>Main</h2><br/>
-        <button>{this.props.auth.user.username}</button><br/>
+        <h2>Hello World!</h2>
+
       </div>
     )
   }
@@ -35,7 +36,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    currentUser: currentUser
+    getCurrentUser: getCurrentUser
   }, dispatch)
 }
 

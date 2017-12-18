@@ -1,6 +1,9 @@
-import React from 'react'
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { signupUser } from '../actions/auth_actions';
 
-import { Form, Button } from 'semantic-ui-react'
+import { Form, Button } from 'semantic-ui-react';
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -14,16 +17,12 @@ class SignUp extends React.Component {
 
   handleSignUp = (event) => {
     event.preventDefault();
-    fetch('http://localhost:3001/api/v1/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify({ user: this.state })
-    })
-      .then(resp => resp.json())
-      .then(data => localStorage.setItem('token', data.token))
+    this.props.signupUser({ user: this.state })
+    // if (this.props.auth.isLoggedIn) {
+    //   this.props.history.push('/')
+    // } else {
+    //   alert('error')
+    // }
       // want to redirect to home page after successfully created a user && want to set currentUser to this user
   }
 
@@ -71,4 +70,15 @@ class SignUp extends React.Component {
   }
 }
 
-export default SignUp;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    signupUser: signupUser,
+  }, dispatch)
+}
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

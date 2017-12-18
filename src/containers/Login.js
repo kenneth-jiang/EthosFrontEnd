@@ -2,12 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { loginUser, logoutUser } from '../actions/auth_actions';
+import { push } from 'react-router-redux';
 
 import { Form, Button } from 'semantic-ui-react'
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props)
     this.state = {
       username: "",
       password: "",
@@ -17,7 +19,7 @@ class Login extends React.Component {
   handleLogin = (event) => {
     event.preventDefault();
     this.props.loginUser({ user: this.state });
-      // want to redirect to home page after successfully logged in a user && want to set currentUser to this user
+
   }
 
   handleChange = (event) => {
@@ -65,6 +67,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     loginUser: loginUser,
     logoutUser: logoutUser,
+    push: push
   }, dispatch)
 }
 
