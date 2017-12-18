@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { Form, Button } from 'semantic-ui-react'
+
 class SignUp extends React.Component {
   constructor(props) {
     super(props);
@@ -33,29 +35,37 @@ class SignUp extends React.Component {
     return (
       <div>
         <h2>SignUp</h2>
-        <form onSubmit={this.handleSignUp}>
-          <input
-            name="username"
-            value={this.state.username}
-            placeholder="Username"
-            onChange={this.handleChange}
-          /><br />
-          <input
-            name="password"
-            type="password"
-            value={this.state.password}
-            placeholder="Password"
-            onChange={this.handleChange}
-          /><br />
-          <input
-            name="password_confirmation"
-            type="password"
-            value={this.state.password_confirmation}
-            placeholder="Confirm Password"
-            onChange={this.handleChange}
-          /><br />
-          <button type="submit">Sign Up</button>
-        </form>
+        <Form size="mini" onSubmit={this.handleSignUp}>
+          <Form.Group>
+            <Form.Input required
+              name="username"
+              value={this.state.username}
+              placeholder="Enter Username"
+              onChange={this.handleChange}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Input
+              name="password"
+              type="password"
+              value={this.state.password}
+              placeholder="Enter Password"
+              onChange={this.handleChange}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Input
+              name="password_confirmation"
+              type="password"
+              value={this.state.password_confirmation}
+              placeholder="Confirm Password"
+              onChange={this.handleChange}
+            />
+          </Form.Group>
+          <Form.Group>
+          <Button type='submit'>Sign Up</Button>
+          </Form.Group>
+        </Form>
       </div>
     )
   }
