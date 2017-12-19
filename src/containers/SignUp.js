@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { signupUser } from '../actions/auth_actions';
@@ -18,12 +19,6 @@ class SignUp extends React.Component {
   handleSignUp = (event) => {
     event.preventDefault();
     this.props.signupUser({ user: this.state })
-    // if (this.props.auth.isLoggedIn) {
-    //   this.props.history.push('/')
-    // } else {
-    //   alert('error')
-    // }
-      // want to redirect to home page after successfully created a user && want to set currentUser to this user
   }
 
   handleChange = (event) => {
@@ -33,38 +28,44 @@ class SignUp extends React.Component {
   render() {
     return (
       <div>
-        <h2>SignUp</h2>
-        <Form size="mini" onSubmit={this.handleSignUp}>
-          <Form.Group>
-            <Form.Input required
-              name="username"
-              value={this.state.username}
-              placeholder="Enter Username"
-              onChange={this.handleChange}
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Input
-              name="password"
-              type="password"
-              value={this.state.password}
-              placeholder="Enter Password"
-              onChange={this.handleChange}
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Input
-              name="password_confirmation"
-              type="password"
-              value={this.state.password_confirmation}
-              placeholder="Confirm Password"
-              onChange={this.handleChange}
-            />
-          </Form.Group>
-          <Form.Group>
-          <Button type='submit'>Sign Up</Button>
-          </Form.Group>
-        </Form>
+        {!this.props.auth.isLoggedIn ?
+          (<div>
+            <h2>SignUp</h2>
+            <Form size="mini" onSubmit={this.handleSignUp}>
+              <Form.Group>
+                <Form.Input required
+                  name="username"
+                  value={this.state.username}
+                  placeholder="Enter Username"
+                  onChange={this.handleChange}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Input
+                  name="password"
+                  type="password"
+                  value={this.state.password}
+                  placeholder="Enter Password"
+                  onChange={this.handleChange}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Input
+                  name="password_confirmation"
+                  type="password"
+                  value={this.state.password_confirmation}
+                  placeholder="Confirm Password"
+                  onChange={this.handleChange}
+                />
+              </Form.Group>
+              <Form.Group>
+              <Button type='submit'>Sign Up</Button>
+              </Form.Group>
+            </Form>
+          </div>)
+        :
+          (<Redirect to='/' />)
+        }
       </div>
     )
   }
