@@ -1,6 +1,6 @@
 import { backendAPI, headers } from '../services/adapter';
 
-export function signupUser(userData) {
+export function signupUser(userData, history) {
   return (dispatch) => {
     fetch(`${backendAPI}/signup`, {
       method: 'POST',
@@ -11,7 +11,8 @@ export function signupUser(userData) {
       .then(data => {
         if (!data.error) {
           localStorage.setItem('token', data.token);
-          return dispatch({ type: 'SIGNUP_USER', payload: {user: data, isLoggedIn: true, error: false} })
+          dispatch({ type: 'SIGNUP_USER', payload: {user: data, isLoggedIn: true, error: false} })
+          history.push('/')
         } else {
           return {error: 'Invalid sign up!'}
         }
@@ -19,7 +20,7 @@ export function signupUser(userData) {
   }
 }
 
-export function loginUser(userData) {
+export function loginUser(userData, history) {
   return (dispatch) => {
     return fetch(`${backendAPI}/login`, {
       method: 'POST',
@@ -30,7 +31,8 @@ export function loginUser(userData) {
       .then(data => {
         if (!data.error) {
           localStorage.setItem('token', data.token);
-          return dispatch({ type: 'LOGIN_USER', payload: {user: data, isLoggedIn: true, error: false} })
+          dispatch({ type: 'LOGIN_USER', payload: {user: data, isLoggedIn: true, error: false} })
+          history.push('/')
         } else {
           return {error: 'Invalid login!'}
         }
@@ -49,5 +51,15 @@ export function getCurrentUser() {
     })
       .then(resp => resp.json())
       .then(data => dispatch({ type: 'CURRENT_USER', payload: {user: data} }))
+  }
+}
+
+export function getAllUsers() {
+  return (dispatch) => {
+    return fetch(`${backendAPI}/all_users`, {
+      headers: Object.assign({}, headers, {token: localStorage.getItem('token')})
+    })
+      .then(resp => resp.json())
+      .then(data => dispatch({ type: 'ALL_USERS', payload: {users: data} }))
   }
 }

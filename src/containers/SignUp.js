@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { signupUser } from '../actions/auth_actions';
+import { signupUser } from '../actions/authentication_actions';
 
 import { Form, Button } from 'semantic-ui-react';
 
@@ -20,7 +20,7 @@ class SignUp extends React.Component {
   handleSignUp = (event) => {
     event.preventDefault();
     const { username, password, password_confirmation } = this.state
-    this.props.signupUser({ user: { username, password, password_confirmation } })
+    this.props.signupUser({ user: { username, password, password_confirmation } }, this.props.history)
   }
 
   handleChange = (event) => {
@@ -31,7 +31,7 @@ class SignUp extends React.Component {
   render() {
     return (
       <div>
-        {!this.props.auth.isLoggedIn ?
+        {!this.props.authentication.isLoggedIn ?
           (<div>
             <h2>SignUp</h2>
             <Form size="mini" onSubmit={this.handleSignUp}>
@@ -77,7 +77,7 @@ class SignUp extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.auth,
+    authentication: state.authentication,
   }
 }
 

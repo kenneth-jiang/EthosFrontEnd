@@ -1,43 +1,34 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom';
+import React from 'react';
+import { withRouter, Switch, Route } from 'react-router-dom';
 
-import NavBar from '../containers/NavBar';
-import SignUp from '../containers/SignUp';
-import Login from '../containers/Login';
-import Main from '../containers/Main';
-import Profile from '../containers/Profile';
-import Search from '../containers/Search';
-import Results from '../containers/Results';
+import { connect } from 'react-redux';
+
+import EthosContainer from "../containers/EthosContainer";
+
+import * as actions from '../actions/authentication_actions';
 
 
-class App extends Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
 
-    if (localStorage.length === 0) {
+    if (localStorage.getItem('token')) {
+      props.getCurrentUser();
+    } else {
       props.history.push('/login');
     }
   }
 
   render() {
     return (
-      <Router>
-        <div>
-          <NavBar />
-          <Route exact path="/" component={Main} />
-          <Route exact path="/signup" component={SignUp} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/profile" component={Profile} />
-          <Route exact path="/search" component={Search} />
-          <Route exact path="/results" component={Results} />
-        </div>
-      </Router>
+      <Switch>
+        <Route path='/' component={EthosContainer} />
+      </Switch>
     );
   }
 }
 
-
-export default withRouter(App);
+export default withRouter(connect(null, actions)(App));
 
 // <Route exact path="/users/:id/pictures/56" component={UserShow} />
 //

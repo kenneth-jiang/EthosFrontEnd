@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { loginUser, logoutUser } from '../actions/auth_actions';
+import { loginUser, logoutUser } from '../actions/authentication_actions';
 
 import { Form, Button } from 'semantic-ui-react'
 
@@ -17,7 +17,7 @@ class Login extends React.Component {
 
   handleLogin = (event) => {
     event.preventDefault();
-    this.props.loginUser({ user: this.state });
+    this.props.loginUser({ user: this.state }, this.props.history);
   }
 
   handleChange = (event) => {
@@ -27,7 +27,7 @@ class Login extends React.Component {
   render() {
     return (
       <div>
-        {!this.props.auth.isLoggedIn ?
+        {!this.props.authentication.isLoggedIn ?
           (<div>
             <h2>Login</h2>
             <Form size="mini" onSubmit={this.handleLogin}>
@@ -63,7 +63,7 @@ class Login extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.auth,
+    authentication: state.authentication,
   }
 }
 

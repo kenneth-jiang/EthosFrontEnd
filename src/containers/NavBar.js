@@ -1,54 +1,63 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { signupUser, loginUser, logoutUser, getCurrentUser } from '../actions/auth_actions';
+import { signupUser, loginUser, logoutUser, getCurrentUser } from '../actions/authentication_actions';
+import { toggleSideBarButton } from '../actions/sidebar_actions';
 
-import { Link } from 'react-router-dom';
-import { Menu, Dropdown } from 'semantic-ui-react';
+import { NavLink, Link } from 'react-router-dom';
+import { Button, Menu, Dropdown } from 'semantic-ui-react';
 
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = { activeItem: "" }
   }
 
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
   render () {
+    const { activeItem } = this.state;
     return (
-      <Menu attached='top'>
-        <Menu.Item>
+      <Menu attached='top' inverted compact>
+        <Menu.Item name='SideBar' active={activeItem === 'SideBar'} onClick={this.handleItemClick}>
+          <Button onClick={this.props.toggleSideBarButton}>
+            Toggle SideBar
+          </Button>
+        </Menu.Item>
+        <Menu.Item name='Main' active={activeItem === 'Main'} onClick={this.handleItemClick}>
           <Link to='/'>
             Main
           </Link>
         </Menu.Item>
-        <Menu.Item>
+        <Menu.Item name='Sign Up' active={activeItem === 'Sign Up'} onClick={this.handleItemClick}>
           <Link to='/signup'>
             Sign Up
           </Link>
         </Menu.Item>
-        <Menu.Item>
+        <Menu.Item name='Search' active={activeItem === 'Search'} onClick={this.handleItemClick}>
           <Link to='/search'>
             Search
           </Link>
         </Menu.Item>
-        <Menu.Item>
+        <Menu.Item name='Results' active={activeItem === 'Results'} onClick={this.handleItemClick}>
           <Link to='/results'>
             Results
           </Link>
         </Menu.Item>
-        {!this.props.auth.isLoggedIn ?
-        <Menu.Item position='right'>
+        {!this.props.authentication.isLoggedIn ?
+        <Menu.Item position='right'name='Login' active={activeItem === 'Login'} onClick={this.handleItemClick}>
           <Link to='/login'>
             Log In
           </Link>
         </Menu.Item>
         :
-        <Menu.Item position='right'>
-          <Dropdown text={this.props.auth.user.username} icon='user' floating labeled button className='icon'>
+        <Menu.Item position='right' name='Profile' active={activeItem === 'Profile'} onClick={this.handleItemClick}>
+          <Dropdown text={this.props.authentication.user.username} icon='user' floating labeled button className='icon'>
             <Dropdown.Menu>
               <Dropdown.Item>
-                <Link to='/profile'>
+                <NavLink to='/profile'>
                   Profile
-                </Link>
+                </NavLink>
               </Dropdown.Item>
               <Dropdown.Item onClick={this.props.logoutUser}>
                 Log Out
@@ -64,7 +73,7 @@ class NavBar extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.auth,
+    authentication: state.authentication,
   }
 }
 
@@ -73,7 +82,8 @@ const mapDispatchToProps = (dispatch) => {
     signupUser: signupUser,
     loginUser: loginUser,
     logoutUser: logoutUser,
-    getCurrentUser: getCurrentUser
+    getCurrentUser: getCurrentUser,
+    toggleSideBarButton: toggleSideBarButton,
   }, dispatch)
 }
 

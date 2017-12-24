@@ -1,10 +1,14 @@
 import { combineReducers } from 'redux';
-import authReducer from './auth_reducer';
+import authenticationReducer from './authentication_reducer';
 import searchReducer from './search_reducer';
 import personalityReducer from './personality_reducer';
+import sidebarReducer from './sidebar_reducer';
+import userReducer from './user_reducer';
 
 export default combineReducers({
-  auth: authReducer,
+  authentication: authenticationReducer,
   search: searchReducer,
   personality: personalityReducer,
+  sidebar: sidebarReducer,
+  user: userReducer,
 });

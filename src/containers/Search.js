@@ -19,7 +19,7 @@ class Search extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.fetchSearchAnswers(this.state.searchTerm);
+    this.props.fetchSearchAnswers(this.state.searchTerm, this.props.history);
   }
 
   render() {

@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-// import Result from '../components/Result';
-
 import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react'
 
 class Results extends React.Component {
@@ -30,14 +28,14 @@ class Results extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="overflow" style={{height: "100%"}}>
         {this.props.search.isLoaded ?
           <div align="center">
             <h2>Results</h2>
             {this.renderResults()}
           </div>
           :
-          <Segment>
+          <Segment style={{height: "100%"}}>
             <Dimmer active>
               <Loader>Loading</Loader>
             </Dimmer>

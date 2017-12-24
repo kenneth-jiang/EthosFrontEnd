@@ -1,6 +1,6 @@
 import { backendAPI, headers } from '../services/adapter';
 
-export function fetchSearchAnswers(searchData) {
+export function fetchSearchAnswers(searchData, history) {
   return (dispatch) => {
     return fetch(`${backendAPI}/search`, {
       method: 'POST',
@@ -11,6 +11,7 @@ export function fetchSearchAnswers(searchData) {
       .then(data => {
         console.log(data)
         dispatch({ type: 'SEARCH_INPUT', payload: {results: data, isLoaded: true} })
+        history.push('/results')
       })
   }
 }
