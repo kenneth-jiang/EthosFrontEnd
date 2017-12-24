@@ -13,16 +13,19 @@ class SignUp extends React.Component {
       username: "",
       password: "",
       password_confirmation: "",
+      errors: false,
     }
   }
 
   handleSignUp = (event) => {
     event.preventDefault();
-    this.props.signupUser({ user: this.state })
+    const { username, password, password_confirmation } = this.state
+    this.props.signupUser({ user: { username, password, password_confirmation } })
   }
 
   handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({ [event.target.name]: event.target.value },
+      () => this.state.password !== this.state.password_confirmation ? this.setState({ errors: "Passwords must match!" }) : this.setState({ errors: false }));
   }
 
   render() {
@@ -49,6 +52,7 @@ class SignUp extends React.Component {
                   onChange={this.handleChange}
                 />
               </Form.Group>
+              {this.state.errors ? this.state.errors : null}
               <Form.Group>
                 <Form.Input
                   name="password_confirmation"

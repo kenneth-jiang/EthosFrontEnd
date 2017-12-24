@@ -9,8 +9,12 @@ export function signupUser(userData) {
     })
       .then(resp => resp.json())
       .then(data => {
-        localStorage.setItem('token', data.token);
-        return dispatch({ type: 'SIGNUP_USER', payload: {user: data, isLoggedIn: true} })
+        if (!data.error) {
+          localStorage.setItem('token', data.token);
+          return dispatch({ type: 'SIGNUP_USER', payload: {user: data, isLoggedIn: true, error: false} })
+        } else {
+          return {error: 'Invalid sign up!'}
+        }
       })
   }
 }
@@ -24,8 +28,12 @@ export function loginUser(userData) {
      })
       .then(resp => resp.json())
       .then(data => {
-        localStorage.setItem('token', data.token);
-        return dispatch({ type: 'LOGIN_USER', payload: {user: data, isLoggedIn: true} })
+        if (!data.error) {
+          localStorage.setItem('token', data.token);
+          return dispatch({ type: 'LOGIN_USER', payload: {user: data, isLoggedIn: true, error: false} })
+        } else {
+          return {error: 'Invalid login!'}
+        }
       })
   }
 }

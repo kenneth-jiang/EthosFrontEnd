@@ -4,11 +4,12 @@ import { bindActionCreators } from 'redux';
 import { signupUser, loginUser, logoutUser, getCurrentUser } from '../actions/auth_actions';
 
 import { Link } from 'react-router-dom';
-import { Menu, Button, Dropdown } from 'semantic-ui-react';
+import { Menu, Dropdown } from 'semantic-ui-react';
 
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {}
   }
 
   render () {
@@ -22,6 +23,16 @@ class NavBar extends React.Component {
         <Menu.Item>
           <Link to='/signup'>
             Sign Up
+          </Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link to='/search'>
+            Search
+          </Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link to='/results'>
+            Results
           </Link>
         </Menu.Item>
         {!this.props.auth.isLoggedIn ?
