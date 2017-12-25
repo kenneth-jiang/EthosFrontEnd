@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { loginUser, logoutUser } from '../actions/authentication_actions';
+import { loginUser, logoutUser } from '../../actions/authenticationActions';
 
 import { Form, Button } from 'semantic-ui-react'
 

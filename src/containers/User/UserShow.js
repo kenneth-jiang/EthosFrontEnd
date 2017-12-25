@@ -2,16 +2,11 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 
-import Loading from '../components/Loading';
+import Loading from '../../components/Loading';
 
 class UserShow extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log(props)
-  }
-
   render() {
-    if (!this.props.authentication) {
+    if (!this.props.user) {
       return (
         <Loading />
       )
@@ -19,7 +14,7 @@ class UserShow extends React.Component {
     return (
       <div>
         This is UserShow {this.props.match.params.id}
-        {this.props.authentication.user.username}
+        {this.props.user.currentUser.username}
       </div>
     )
   }
@@ -27,7 +22,7 @@ class UserShow extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    authentication: state.authentication
+    user: state.user,
   }
 }
 

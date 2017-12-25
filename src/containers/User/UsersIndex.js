@@ -2,16 +2,10 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 
-import Loading from '../components/Loading';
+import Loading from '../../components/Loading';
 
-class AllUsers extends React.Component {
-  constructor(props) {
-    super(props);
-    console.log(props)
-  }
-
+class UsersIndex extends React.Component {
   render() {
-    console.log(this.props)
     if (!this.props.user.allUsers.users) {
       return (
         <Loading />
@@ -31,4 +25,4 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps)(AllUsers);
+export default connect(mapStateToProps)(UsersIndex);
