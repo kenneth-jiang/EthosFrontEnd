@@ -1,7 +1,9 @@
 import { TOGGLE_SIDEBAR_VISIBLITY } from '../actions/actionTypes';
 
 
-export default(state = {toggleVisibility: true}, action) => {
+const INITIAL_STATE = {toggleVisibility: true};
+
+export default(state = INITIAL_STATE, action) => {
   switch (action.type) {
     case (TOGGLE_SIDEBAR_VISIBLITY):
       return {...state, toggleVisibility: !state.toggleVisibility };

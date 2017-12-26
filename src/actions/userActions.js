@@ -7,7 +7,7 @@ export function getCurrentUser() {
       headers: Object.assign({}, headers, {token: localStorage.getItem('token')})
     })
       .then(resp => resp.json())
-      .then(data => dispatch({ type: GET_CURRENT_USER, payload: {user: data} }))
+      .then(data => dispatch({ type: GET_CURRENT_USER, payload: {currentUser: data} }))
   }
 }
 
@@ -17,6 +17,6 @@ export function getAllUsers() {
       headers: Object.assign({}, headers, {token: localStorage.getItem('token')})
     })
       .then(resp => resp.json())
-      .then(data => dispatch({ type: GET_ALL_USERS, payload: {users: data} }))
+      .then(data => dispatch({ type: GET_ALL_USERS, payload: {allUsers: data} }))
   }
 }

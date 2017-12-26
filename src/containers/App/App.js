@@ -6,14 +6,12 @@ import { connect } from 'react-redux';
 import NavBar from '../NavBar/NavBar';
 import SignUp from '../Authorization/SignUp';
 import Login from '../Authorization/Login';
-import UserShow from '../User/UserShow';
+import UsersShow from '../User/UsersShow';
 import UsersIndex from '../User/UsersIndex';
 import WolframSearch from '../Wolfram/WolframSearch';
 import WolframResults from '../Wolfram/WolframResults';
 
 import { getCurrentUser } from '../../actions/userActions';
-import { getAllUsers } from '../../actions/userActions';
-import { getUserPersonality } from '../../actions/personalityActions';
 
 import { Sidebar, Segment, Menu, Icon } from 'semantic-ui-react'
 
@@ -22,8 +20,6 @@ class App extends React.Component {
     super(props);
     if (localStorage.getItem('token')) {
       props.getCurrentUser();
-      // props.getUserPersonality();
-      props.getAllUsers();
     } else {
       props.history.push('login');
     }
@@ -61,7 +57,7 @@ class App extends React.Component {
                     <Route exact path="/signup" component={SignUp} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/users/all" component={UsersIndex} />
-                    <Route exact path="/user/:id/" component={UserShow} />
+                    <Route exact path="/users/:id/" component={UsersShow} />
                     <Route exact path="/wolfram_search" component={WolframSearch} />
                     <Route exact path="/wolfram_results" component={WolframResults} />
                   </Switch>
@@ -83,8 +79,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     getCurrentUser,
-    getUserPersonality,
-    getAllUsers,
   }, dispatch)
 }
 

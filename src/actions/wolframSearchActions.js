@@ -3,10 +3,10 @@ import { WOLFRAM_SEARCH } from './actionTypes';
 
 export function getWolframSearch(searchData, history) {
   return (dispatch) => {
-    return fetch(`${backendAPI}/search`, {
+    return fetch(`${backendAPI}/wolfram_search`, {
       method: 'POST',
       headers: headers,
-      body: JSON.stringify({search_term: searchData})
+      body: JSON.stringify({searches: searchData})
     })
       .then(resp => resp.json())
       .then(data => {

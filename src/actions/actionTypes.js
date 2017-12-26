@@ -1,6 +1,7 @@
 // Authentication Actions ---------------------------------------------------- |
 export const AUTHORIZE_USER = "AUTHORIZE_USER";
 export const UNAUTHORIZE_USER = "UNAUTHORIZE_USER";
+export const ERROR = "ERROR";
 
 // User Actions -------------------------------------------------------------- |
 export const GET_CURRENT_USER = "GET_CURRENT_USER";

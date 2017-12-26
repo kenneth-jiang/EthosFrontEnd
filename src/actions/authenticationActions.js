@@ -1,5 +1,5 @@
 import { backendAPI, headers } from '../services/Adapter';
-import { AUTHORIZE_USER, UNAUTHORIZE_USER } from './actionTypes';
+import { AUTHORIZE_USER, UNAUTHORIZE_USER, GET_CURRENT_USER, ERROR } from './actionTypes';
 
 export function signupUser(signData, history) {
   return (dispatch) => {
@@ -12,10 +12,11 @@ export function signupUser(signData, history) {
       .then(data => {
         if (!data.error) {
           localStorage.setItem('token', data.token);
-          dispatch({ type: AUTHORIZE_USER, payload: {currentUser: data, isLoggedIn: true, error: false} })
+          dispatch({ type: AUTHORIZE_USER, payload: {currentUser: data, isLoggedIn: true, error: false} });
+          dispatch({ type: GET_CURRENT_USER, payload: {currentUser: data }});
           history.push('/')
         } else {
-          return {error: 'Invalid sign up!'}
+          return dispatch({ type: ERROR, payload: {error: 'Invalid sign up!'} });
         }
       })
   }
@@ -32,15 +33,20 @@ export function loginUser(loginData, history) {
       .then(data => {
         if (!data.error) {
           localStorage.setItem('token', data.token);
-          dispatch({ type: AUTHORIZE_USER, payload: {currentUser: data, isLoggedIn: true, error: false} })
+          dispatch({ type: AUTHORIZE_USER, payload: {currentUser: data, isLoggedIn: true, error: false} });
+          dispatch({ type: GET_CURRENT_USER, payload: {currentUser: data }});
           history.push('/')
         } else {
-          return {error: 'Invalid login!'}
+          return dispatch({ type: ERROR, payload: {error: 'Invalid log in!'} });
         }
       })
   }
 }
 
 export function logoutUser() {
-  return { type: UNAUTHORIZE_USER}
+  return { type: UNAUTHORIZE_USER };
+}
+
+export function error() {
+  return { type: ERROR };
 }

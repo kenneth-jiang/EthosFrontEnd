@@ -48,6 +48,7 @@ class Login extends React.Component {
                   onChange={this.handleChange}
                 />
               </Form.Group>
+              {this.props.authentication.error}
               <Form.Group>
                 <Button type="submit">Login</Button>
               </Form.Group>

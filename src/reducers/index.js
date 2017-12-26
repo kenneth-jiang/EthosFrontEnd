@@ -9,8 +9,8 @@ import wolframReducer from './wolframReducer';
 
 export default combineReducers({
   authentication: authenticationReducer,
-  wolfram: wolframReducer,
-  personality: personalityReducer,
-  sidebar: sidebarReducer,
   user: userReducer,
+  sidebar: sidebarReducer,
+  personality: personalityReducer,
+  wolfram: wolframReducer,
 });
