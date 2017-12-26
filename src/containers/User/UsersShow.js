@@ -7,7 +7,7 @@ import Loading from '../../components/Loading';
 
 class UsersShow extends React.Component {
   componentDidMount() {
-    this.props.getUserPersonality();
+    // this.props.getUserPersonality();
   }
 
   userConsumptionPreference = () => {
@@ -130,8 +130,3 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {getUserPersonality})(UsersShow);
-
-// Consumption Preference: {this.userConsumptionPreference()} <br />
-// Needs: {this.userNeeds()} <br />
-// Personality: {this.userPersonality()} <br />
-// Values: {this.userValues()} <br />

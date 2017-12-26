@@ -10,6 +10,7 @@ import UsersShow from '../User/UsersShow';
 import UsersIndex from '../User/UsersIndex';
 import WolframSearch from '../Wolfram/WolframSearch';
 import WolframResults from '../Wolfram/WolframResults';
+import Youtube from '../Youtube/Youtube';
 
 import { getCurrentUser } from '../../actions/userActions';
 
@@ -25,10 +26,16 @@ class App extends React.Component {
     }
   }
 
+  requireUserToAccess = () => {
+    if (!localStorage.getItem('token') && !this.props.isLoggedIn) {
+      this.props.history.push('/login')
+    }
+  }
+
   render() {
     return (
       <div style={{height: "100%"}}>
-        <NavBar />
+        <NavBar props={this.props} />
           <div style={{height: "100%"}}>
             <Sidebar.Pushable as={Segment} style={{height: "100%"}}>
               <Sidebar as={Menu} animation="slide along" width='thin' visible={this.props.sidebar.toggleVisibility} icon='labeled' vertical inverted>
@@ -60,6 +67,7 @@ class App extends React.Component {
                     <Route exact path="/users/:id/" component={UsersShow} />
                     <Route exact path="/wolfram_search" component={WolframSearch} />
                     <Route exact path="/wolfram_results" component={WolframResults} />
+                    <Route exact path="/videos" component={Youtube} />
                   </Switch>
                 </Segment>
               </Sidebar.Pusher>
@@ -73,6 +81,7 @@ class App extends React.Component {
 const mapStateToProps = (state) => {
   return {
     sidebar: state.sidebar,
+    authentication: state.authentication,
   }
 }
 

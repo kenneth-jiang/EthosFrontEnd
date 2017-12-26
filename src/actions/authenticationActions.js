@@ -14,7 +14,7 @@ export function signupUser(signData, history) {
           localStorage.setItem('token', data.token);
           dispatch({ type: AUTHORIZE_USER, payload: {currentUser: data, isLoggedIn: true, error: false} });
           dispatch({ type: GET_CURRENT_USER, payload: {currentUser: data }});
-          history.push('/')
+          return history.push('/')
         } else {
           return dispatch({ type: ERROR, payload: {error: 'Invalid sign up!'} });
         }
@@ -35,7 +35,7 @@ export function loginUser(loginData, history) {
           localStorage.setItem('token', data.token);
           dispatch({ type: AUTHORIZE_USER, payload: {currentUser: data, isLoggedIn: true, error: false} });
           dispatch({ type: GET_CURRENT_USER, payload: {currentUser: data }});
-          history.push('/')
+          return history.push('/')
         } else {
           return dispatch({ type: ERROR, payload: {error: 'Invalid log in!'} });
         }
@@ -43,10 +43,16 @@ export function loginUser(loginData, history) {
   }
 }
 
-export function logoutUser() {
-  return { type: UNAUTHORIZE_USER };
+export function logoutUser(history) {
+  return (dispatch) => {
+    localStorage.removeItem('token');
+    dispatch({ type: UNAUTHORIZE_USER });
+    return history.push('/login');
+  }
 }
 
 export function error() {
-  return { type: ERROR };
+  return (dispatch) => {
+    return dispatch({ type: ERROR });
+  }
 }

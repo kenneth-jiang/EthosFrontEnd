@@ -8,7 +8,6 @@ export default (state = INITIAL_STATE, action) => {
     case (AUTHORIZE_USER):
       return  {...state, currentUser: action.payload.currentUser, isLoggedIn: true};
     case (UNAUTHORIZE_USER):
-      localStorage.removeItem('token');
       return {...state, currentUser: {}, isLoggedIn: false};
     case (GET_CURRENT_USER):
       return {...state, currentUser: action.payload.currentUser, isLoggedIn: true};

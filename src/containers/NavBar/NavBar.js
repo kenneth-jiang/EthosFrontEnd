@@ -29,7 +29,7 @@ class NavBar extends React.Component {
         </Menu.Item>
         <Menu.Item>
           <Link to='/wolfram_search'>
-            Search
+            Wolfram
           </Link>
         </Menu.Item>
         <Menu.Item>
@@ -37,7 +37,7 @@ class NavBar extends React.Component {
             Results
           </Link>
         </Menu.Item>
-        {!this.props.authentication.isLoggedIn ?
+        {!this.props.authentication.isLoggedIn || !this.props.user.currentUser.user ?
         <Menu.Item position='right'>
           <Link to='/login'>
             Log In
@@ -52,7 +52,7 @@ class NavBar extends React.Component {
                   Profile
                 </NavLink>
               </Dropdown.Item>
-              <Dropdown.Item onClick={this.props.logoutUser}>
+              <Dropdown.Item onClick={() => this.props.logoutUser(this.props.props.history)}>
                 Log Out
               </Dropdown.Item>
             </Dropdown.Menu>
