@@ -1,8 +1,6 @@
 html, body, #root, .App, .fulldisplay {
   height: 100%;
   width: 100%;
-}
-
-.overflow {
-    overflow: auto;
+  overflow: auto;
+  border: 1px solid;
 }

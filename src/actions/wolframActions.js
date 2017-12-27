@@ -6,13 +6,12 @@ export function getWolframSearch(searchData, history) {
     return fetch(`${backendAPI}/wolfram_search`, {
       method: 'POST',
       headers: headers,
-      body: JSON.stringify({searches: searchData})
+      body: JSON.stringify({search_term: searchData})
     })
       .then(resp => resp.json())
       .then(data => {
-        console.log(data)
         dispatch({ type: WOLFRAM_SEARCH, payload: {results: data} })
-        history.push('/wolfram_results')
+        return history.push('/wolfram_results')
       })
   }
 }

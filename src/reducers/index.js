@@ -5,6 +5,9 @@ import userReducer from './userReducer';
 import sidebarReducer from './sidebarReducer';
 import personalityReducer from './personalityReducer';
 import wolframReducer from './wolframReducer';
+import youtubeReducer from './youtubeReducer';
+import newsReducer from './newsReducer';
+import farooReducer from './farooReducer';
 
 
 export default combineReducers({
@@ -13,4 +16,7 @@ export default combineReducers({
   sidebar: sidebarReducer,
   personality: personalityReducer,
   wolfram: wolframReducer,
+  youtube: youtubeReducer,
+  news: newsReducer,
+  faroo: farooReducer,
 });

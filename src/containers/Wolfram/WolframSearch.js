@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { getWolframSearch } from '../../actions/wolframSearchActions';
+import { getWolframSearch } from '../../actions/wolframActions';
 import { Button, Form, Input } from 'semantic-ui-react';
 
 class WolframSearch extends React.Component {

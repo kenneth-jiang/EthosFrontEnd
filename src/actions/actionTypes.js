@@ -13,5 +13,21 @@ export const TOGGLE_SIDEBAR_VISIBLITY = "TOGGLE_SIDEBAR_VISIBLITY";
 // Personality Actions ------------------------------------------------------- |
 export const GET_USER_PERSONALITY = "GET_USER_PERSONALITY";
 
-// WolframSearch Actions ----------------------------------------------------- |
+// Wolfram Actions ----------------------------------------------------------- |
 export const WOLFRAM_SEARCH = "WOLFRAM_SEARCH";
+
+// Youtube Actions ----------------------------------------------------------- |
+export const YOUTUBE_SEARCH = "YOUTUBE_SEARCH";
+export const VIEW_CURRENT_VIDEO = "VIEW_CURRENT_VIDEO";
+
+// Faroo Actions ------------------------------------------------------------- |
+export const FAROO_SEARCH = "FAROO_SEARCH";
+
+// News Actions -------------------------------------------------------------- |
+export const NEWS_SEARCH = "NEWS_SEARCH";
+
+// Reddit Actions ------------------------------------------------------------ |
+export const REDDIT_SEARCH = "REDDIT_SEARCH";
+
+// Spotify Actions ----------------------------------------------------------- |
+export const SPOTIFY_SEARCH = "SPOTIFY_SEARCH";
