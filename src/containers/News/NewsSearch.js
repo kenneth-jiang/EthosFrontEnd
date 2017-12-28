@@ -6,6 +6,8 @@ import { Form, Input, Button, Grid } from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
+import { Checkbox } from 'semantic-ui-react';
+
 
 class NewsSearch extends React.Component {
   constructor(props) {
@@ -14,8 +16,12 @@ class NewsSearch extends React.Component {
       searchTerm: "",
       startDate: moment(),
       endDate: moment(),
-      useDate: true,
+      useDate: false,
     }
+  }
+
+  handleToggle = () => {
+    this.setState({ useDate: !this.state.useDate })
   }
 
   handleChange = (event) => {
@@ -24,7 +30,13 @@ class NewsSearch extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.searchNews(this.state.searchTerm);
+    if (this.state.useDate) {
+      const startDate = this.state.startDate._d.toLocaleDateString()
+      const endDate = this.state.endDate._d.toLocaleDateString()
+      return this.props.searchNews(this.state.searchTerm, startDate, endDate);
+    } else {
+      return this.props.searchNews(this.state.searchTerm);
+    }
   }
 
   handleChangeStart = (date) => {
@@ -36,47 +48,51 @@ class NewsSearch extends React.Component {
   handleChangeEnd = (date) => {
     this.setState({
       endDate: date
-    });
+    })
   }
 
   render() {
     return (
       <div>
-      <Grid style={{border:"solid"}} align="center">
-
-        <Form onSubmit={this.handleSubmit}>
-          <h3>Search News Videos!</h3>
-          <Input icon='search' onChange={this.handleChange} value={this.state.searchTerm} />
-          <Button type="submit">Search</Button>
-        </Form>
-      
-
-        <Button onClick={() => this.setState({useDate: !this.state.useDate})}>Toggle Date</Button>
-        {this.state.useDate ?
-          <div>
-            <DatePicker
-            selected={this.state.startDate}
-            selectsStart
-            startDate={this.state.startDate}
-            endDate={this.state.endDate}
-            onChange={this.handleChangeStart}
-            />
-            <DatePicker
-            selected={this.state.endDate}
-            selectsEnd
-            startDate={this.state.startDate}
-            endDate={this.state.endDate}
-            onChange={this.handleChangeEnd}
-            />
-          </div>
-        :
-          null
-        }
-        <Input icon='search' onChange={this.handleChange} value={this.state.searchTerm} />
-      
-        <Input icon='search' onChange={this.handleChange} value={this.state.searchTerm} />
-        <Input icon='search' onChange={this.handleChange} value={this.state.searchTerm} />
-      </Grid>
+        <Grid columns={4}>
+          <Grid.Column>
+          </Grid.Column>
+          <Grid.Column>
+            <h3>Search News!</h3>
+            <Form onSubmit={this.handleSubmit}>
+              <Input icon='search' onChange={this.handleChange} value={this.state.searchTerm} />
+              <Button type="submit">Search</Button>
+            </Form>
+          </Grid.Column>
+          <Grid.Column>
+          <h3>Filter Dates</h3><br/>
+          <Checkbox toggle onChange={this.handleToggle} />
+            {this.state.useDate ?
+              <div>
+              Start Date:
+              <DatePicker
+                selected={this.state.startDate}
+                selectsStart
+                startDate={this.state.startDate}
+                endDate={this.state.endDate}
+                onChange={this.handleChangeStart}
+              />
+              End Date:
+              <DatePicker
+                selected={this.state.endDate}
+                selectsEnd
+                startDate={this.state.startDate}
+                endDate={this.state.endDate}
+                onChange={this.handleChangeEnd}
+              />
+              </div>
+              :
+              null
+            }
+          </Grid.Column>
+          <Grid.Column>
+          </Grid.Column>
+        </Grid>
       </div>
     )
   }

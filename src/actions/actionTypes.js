@@ -25,6 +25,7 @@ export const FAROO_SEARCH = "FAROO_SEARCH";
 
 // News Actions -------------------------------------------------------------- |
 export const NEWS_SEARCH = "NEWS_SEARCH";
+export const SOURCE_SEARCH = "SOURCE_SEARCH";
 
 // Reddit Actions ------------------------------------------------------------ |
 export const REDDIT_SEARCH = "REDDIT_SEARCH";

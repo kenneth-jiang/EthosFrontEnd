@@ -12,10 +12,12 @@ import WolframSearch from '../Wolfram/WolframSearch';
 import WolframResults from '../Wolfram/WolframResults';
 import YoutubePage from '../Youtube/YoutubePage';
 import NewsPage from '../News/NewsPage';
+import RedditPage from '../Reddit/RedditPage';
 
 import { getCurrentUser } from '../../actions/userActions';
 
-import { Sidebar, Segment, Menu, Icon } from 'semantic-ui-react'
+import { Sidebar, Segment, Menu, Icon } from 'semantic-ui-react';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -64,6 +66,12 @@ class App extends React.Component {
                     News
                   </Link>
                 </Menu.Item>
+                <Menu.Item>
+                  <Icon name='newspaper' />
+                  <Link to="/news/sources">
+                    News Sources
+                  </Link>
+                </Menu.Item>
               </Sidebar>
               <Sidebar.Pusher style={{height: "100%"}}>
                 <Segment style={{height: "100%"}}>
@@ -74,8 +82,9 @@ class App extends React.Component {
                     <Route exact path="/users/:id/" component={UsersShow} />
                     <Route exact path="/wolfram_search" component={WolframSearch} />
                     <Route exact path="/wolfram_results" component={WolframResults} />
-                    <Route exact path="/youtube" component={YoutubePage} />
-                    <Route exact path="/news" component={NewsPage} />
+                    <Route path="/youtube" component={YoutubePage} />
+                    <Route path="/news" component={NewsPage} />
+                    <Route path="/reddit" component={RedditPage} />
                   </Switch>
                 </Segment>
               </Sidebar.Pusher>

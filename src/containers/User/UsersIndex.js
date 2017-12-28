@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-import { getAllUsers } from '../../actions/userActions';
+// import { getAllUsers } from '../../actions/userActions';
 import Loading from '../../components/Loading';
 
 class UsersIndex extends React.Component {
-  componentWillMount() {
-    this.props.getAllUsers();
-  }
+  // componentWillMount() {
+  //   this.props.getAllUsers();
+  // }
 
   render() {
     if (!this.props.user.allUsers.users) {

@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { viewCurrentVideo } from '../../actions/youtubeActions';
-import { Card, Image } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
 
 
 class YoutubeResults extends React.Component {

@@ -1,15 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import sourceList from '../../services/NewsSourceList';
+import { addClickTerm } from '../../actions/clickActions';
+import { searchNewsSource, favoriteNewsSource } from '../../actions/newsActions';
 
-import { Card, Icon } from 'semantic-ui-react';
+import { Button, Card, Icon } from 'semantic-ui-react';
 
 
 class NewsSources extends React.Component {
   renderSources() {
-    return sourceList.sources.map((source) => {
+    console.log(this.props)
+    return sourceList.sources.map((source, index) => {
       return (
-        <Card raised>
+        <Card key={index} raised onClick={() => (this.props.addClickTerm(source.name).then(this.props.searchNewsSource(source.id, this.props.history)))}>
           <Card.Content>
             <Card.Header>
               {source.name}
@@ -27,8 +31,7 @@ class NewsSources extends React.Component {
               </a>
             </Card.Content>
             <Card.Content extra align="right">
-              <Icon name='heart' corner color="red" onClick={() => alert('hi')}/>
-
+              <Icon name='heart' corner color="red" onClick={() => this.props.favoriteNewsSource(source)}/>
             </Card.Content>
         </Card>
       )
@@ -37,11 +40,14 @@ class NewsSources extends React.Component {
 
   render() {
     return (
-      <Card.Group itemsPerRow={6}>
-        {this.renderSources()}
-      </Card.Group>
+      <div>
+        <Button onClick={() => this.props.history.push('/news')}>Search News</Button><br /><br />
+        <Card.Group itemsPerRow={6}>
+          {this.renderSources()}
+        </Card.Group>
+      </div>
     )
   }
 }
 
-export default NewsSources;
+export default connect(null, { addClickTerm, searchNewsSource, favoriteNewsSource })(NewsSources);
