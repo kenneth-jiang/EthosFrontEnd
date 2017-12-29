@@ -4,3 +4,9 @@ html, body, #root, .App, .fulldisplay {
   overflow: auto;
   border: 1px solid;
 }
+
+.bottom-right {
+  position: absolute;
+  bottom: 30px;
+  right: 20px;
+}

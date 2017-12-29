@@ -8,6 +8,7 @@ import wolframReducer from './wolframReducer';
 import youtubeReducer from './youtubeReducer';
 import newsReducer from './newsReducer';
 import farooReducer from './farooReducer';
+import redditReducer from './redditReducer';
 
 
 export default combineReducers({
@@ -19,4 +20,5 @@ export default combineReducers({
   youtube: youtubeReducer,
   news: newsReducer,
   faroo: farooReducer,
+  reddit: redditReducer,
 });

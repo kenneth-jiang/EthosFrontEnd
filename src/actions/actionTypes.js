@@ -28,7 +28,14 @@ export const NEWS_SEARCH = "NEWS_SEARCH";
 export const SOURCE_SEARCH = "SOURCE_SEARCH";
 
 // Reddit Actions ------------------------------------------------------------ |
-export const REDDIT_SEARCH = "REDDIT_SEARCH";
+export const GET_REDDIT_SELF = "GET_REDDIT_SELF";
+export const GET_REDDIT_FUNNY = "GET_REDDIT_FUNNY";
+export const GET_REDDIT_AWW = "GET_REDDIT_AWW";
+export const GET_REDDIT_TIL = "GET_REDDIT_TIL";
+export const GET_REDDIT_PICS = "GET_REDDIT_PICS";
+export const GET_REDDIT_POPULAR = "GET_REDDIT_POPULAR";
+export const GET_REDDIT_POST = "GET_REDDIT_POST";
+
 
 // Spotify Actions ----------------------------------------------------------- |
 export const SPOTIFY_SEARCH = "SPOTIFY_SEARCH";

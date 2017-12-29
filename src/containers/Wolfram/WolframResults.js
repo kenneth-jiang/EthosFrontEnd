@@ -29,7 +29,7 @@ class WolframResults extends React.Component {
     }
 
     return (
-      <div className="overflow" style={{height: "100%"}}>
+      <div className="fulldisplay" style={{height: "100%"}}>
         <div align="center">
           <h2>Results</h2>
           {this.renderResults()}

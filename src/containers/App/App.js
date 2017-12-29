@@ -13,8 +13,10 @@ import WolframResults from '../Wolfram/WolframResults';
 import YoutubePage from '../Youtube/YoutubePage';
 import NewsPage from '../News/NewsPage';
 import RedditPage from '../Reddit/RedditPage';
+import RedditAuthorization from '../Reddit/RedditAuthorization';
 
 import { getCurrentUser } from '../../actions/userActions';
+import { getRedditSelf } from '../../actions/redditActions';
 
 import { Sidebar, Segment, Menu, Icon } from 'semantic-ui-react';
 
@@ -24,6 +26,7 @@ class App extends React.Component {
     super(props);
     if (localStorage.getItem('token')) {
       props.getCurrentUser();
+      this.props.getRedditSelf();
     } else {
       props.history.push('login');
     }
@@ -43,15 +46,9 @@ class App extends React.Component {
                   </Link>
                 </Menu.Item>
                 <Menu.Item>
-                  <Icon name='gamepad' />
+                  <Icon name='search' />
                   <Link to="/wolfram_search">
-                    Wolfram Search
-                  </Link>
-                </Menu.Item>
-                <Menu.Item name='camera'>
-                  <Icon name='camera' />
-                  <Link to="/wolfram_results">
-                    Wolfram Results
+                    Wolfram
                   </Link>
                 </Menu.Item>
                 <Menu.Item>
@@ -72,6 +69,25 @@ class App extends React.Component {
                     News Sources
                   </Link>
                 </Menu.Item>
+                {this.props.reddit.isLoggedIn ?
+                  <Menu.Item>
+                    <Icon name='reddit' />
+                    <Link to="/reddit">
+                      Reddit
+                    </Link>
+                  </Menu.Item>
+                  :
+                  <Menu.Item>
+                    <Icon name='reddit' />
+                    <a href="http://localhost:3001/api/v1/reddit_login">
+                      Log In To Reddit
+                    </a>
+                  </Menu.Item>
+                }
+                <Menu.Item>
+                  <Icon name='spotify' />
+                  Spotify
+                </Menu.Item>
               </Sidebar>
               <Sidebar.Pusher style={{height: "100%"}}>
                 <Segment style={{height: "100%"}}>
@@ -85,6 +101,7 @@ class App extends React.Component {
                     <Route path="/youtube" component={YoutubePage} />
                     <Route path="/news" component={NewsPage} />
                     <Route path="/reddit" component={RedditPage} />
+                    <Route path="/reddit_authorization" component={RedditAuthorization} />
                   </Switch>
                 </Segment>
               </Sidebar.Pusher>
@@ -99,12 +116,14 @@ const mapStateToProps = (state) => {
   return {
     sidebar: state.sidebar,
     authentication: state.authentication,
+    reddit: state.reddit,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     getCurrentUser,
+    getRedditSelf,
   }, dispatch)
 }
 
