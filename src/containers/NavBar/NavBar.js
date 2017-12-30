@@ -6,7 +6,7 @@ import { getCurrentUser } from '../../actions/userActions';
 import { toggleSideBarVisibility } from '../../actions/sidebarActions';
 
 import { NavLink, Link } from 'react-router-dom';
-import { Button, Menu, Dropdown } from 'semantic-ui-react';
+import { Button, Menu, Dropdown, Icon } from 'semantic-ui-react';
 
 class NavBar extends React.Component {
   render () {
@@ -53,6 +53,7 @@ class NavBar extends React.Component {
                 </NavLink>
               </Dropdown.Item>
               <Dropdown.Item onClick={() => this.props.logoutUser(this.props.props.history)}>
+                <Icon name="shutdown" />
                 Log Out
               </Dropdown.Item>
             </Dropdown.Menu>

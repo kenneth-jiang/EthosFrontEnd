@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import sourceList from '../../services/NewsSourceList';
+import sourceList from './NewsSourceList';
 import { addClickTerm } from '../../actions/clickActions';
 import { searchNewsSource, favoriteNewsSource } from '../../actions/newsActions';
 

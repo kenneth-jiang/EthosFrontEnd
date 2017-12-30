@@ -1,6 +1,7 @@
 import { backendAPI, headers } from '../services/Adapter';
 import { GET_REDDIT_SELF, GET_REDDIT_FUNNY, GET_REDDIT_AWW, GET_REDDIT_TIL, GET_REDDIT_PICS, GET_REDDIT_POPULAR, GET_REDDIT_POST } from './actionTypes';
 
+
 export function redditAccessToken(history, location) {
   return (dispatch) => {
     return fetch(`${backendAPI}/reddit_token`, {

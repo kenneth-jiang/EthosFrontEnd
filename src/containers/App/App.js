@@ -14,9 +14,10 @@ import YoutubePage from '../Youtube/YoutubePage';
 import NewsPage from '../News/NewsPage';
 import RedditPage from '../Reddit/RedditPage';
 import RedditAuthorization from '../Reddit/RedditAuthorization';
+import SpotifyPage from '../Spotify/SpotifyPage';
+import SpotifyAuthorization from '../Spotify/SpotifyAuthorization';
 
 import { getCurrentUser } from '../../actions/userActions';
-import { getRedditSelf } from '../../actions/redditActions';
 
 import { Sidebar, Segment, Menu, Icon } from 'semantic-ui-react';
 
@@ -26,7 +27,6 @@ class App extends React.Component {
     super(props);
     if (localStorage.getItem('token')) {
       props.getCurrentUser();
-      this.props.getRedditSelf();
     } else {
       props.history.push('login');
     }
@@ -84,10 +84,21 @@ class App extends React.Component {
                     </a>
                   </Menu.Item>
                 }
-                <Menu.Item>
-                  <Icon name='spotify' />
-                  Spotify
-                </Menu.Item>
+                {this.props.spotify.isLoggedIn ?
+                  <Menu.Item>
+                    <Icon name='spotify' />
+                    <Link to="/spotify">
+                      Spotify
+                    </Link>
+                  </Menu.Item>
+                  :
+                  <Menu.Item>
+                    <Icon name='spotify' />
+                    <a href="http://localhost:3001/api/v1/spotify_login">
+                      Log In To Spotify
+                    </a>
+                  </Menu.Item>
+                }
               </Sidebar>
               <Sidebar.Pusher style={{height: "100%"}}>
                 <Segment style={{height: "100%"}}>
@@ -101,11 +112,20 @@ class App extends React.Component {
                     <Route path="/youtube" component={YoutubePage} />
                     <Route path="/news" component={NewsPage} />
                     <Route path="/reddit" component={RedditPage} />
-                    <Route path="/reddit_authorization" component={RedditAuthorization} />
+                    <Route path="/spotify" component={SpotifyPage} />
+                    <Route exact path="/reddit_authorization" component={RedditAuthorization} />
+                    <Route exact path="/spotify_authorization" component={SpotifyAuthorization} />
                   </Switch>
                 </Segment>
               </Sidebar.Pusher>
             </Sidebar.Pushable>
+            {this.props.sidebar.toggleVisibility ?
+              <div style={{position:"absolute", left:"25px", bottom:"25px"}}>
+                <iframe src={`https://open.spotify.com/embed?uri=${this.props.spotify.uri}`} width="250" height="80" allowtransparency="true"></iframe>
+              </div>
+            :
+              null
+            }
         </div>
       </div>
     )
@@ -117,18 +137,18 @@ const mapStateToProps = (state) => {
     sidebar: state.sidebar,
     authentication: state.authentication,
     reddit: state.reddit,
+    spotify: state.spotify,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     getCurrentUser,
-    getRedditSelf,
   }, dispatch)
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
 
 // <div style={{position:"absolute", bottom:"0"}}>
-//   <iframe src="https://open.spotify.com/embed?uri=spotify:track:7x8dCjCr0x6x2lXKujYD34" width="250" height="80" frameBorder="0" allowtransparency="true"></iframe>
+//   <iframe src="https://open.spotify.com/embed?uri=spotify:track:1JDIArrcepzWDTAWXdGYmP" width="250" height="80" frameBorder="0" allowtransparency="true"></iframe>
 // </div>

@@ -10,10 +10,15 @@ import RedditPopular from './RedditPopular';
 import RedditTIL from './RedditTIL';
 import RedditPost from './RedditPost';
 
+import { getRedditSelf } from '../../actions/redditActions';
+
 import { Grid, Button, Card, Image } from 'semantic-ui-react';
 
 
 class RedditPage extends React.Component {
+  componentDidMount() {
+    this.props.getRedditSelf();
+  }
   render() {
     console.log(this.props);
     return (
@@ -62,4 +67,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(RedditPage);
+export default connect(mapStateToProps, {getRedditSelf})(RedditPage);
