@@ -48,7 +48,7 @@ class NavBar extends React.Component {
           <Dropdown text={this.props.user.currentUser.user.username} icon='user' floating labeled button className='icon'>
             <Dropdown.Menu>
               <Dropdown.Item>
-                <NavLink to={`/users/${this.props.user.currentUser.user.id}`}>
+                <NavLink to={`/user/${this.props.user.currentUser.user.id}`}>
                   Profile
                 </NavLink>
               </Dropdown.Item>

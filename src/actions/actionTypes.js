@@ -1,6 +1,7 @@
 // Authentication Actions ---------------------------------------------------- |
 export const AUTHORIZE_USER = "AUTHORIZE_USER";
 export const UNAUTHORIZE_USER = "UNAUTHORIZE_USER";
+export const UPDATE_USER_INFO = "UPDATE_USER_INFO";
 export const ERROR = "ERROR";
 
 // User Actions -------------------------------------------------------------- |
@@ -34,6 +35,7 @@ export const GET_REDDIT_AWW = "GET_REDDIT_AWW";
 export const GET_REDDIT_TIL = "GET_REDDIT_TIL";
 export const GET_REDDIT_PICS = "GET_REDDIT_PICS";
 export const GET_REDDIT_POPULAR = "GET_REDDIT_POPULAR";
+export const GET_REDDIT_CUSTOM = "GET_REDDIT_CUSTOM";
 export const GET_REDDIT_POST = "GET_REDDIT_POST";
 
 // Spotify Actions ----------------------------------------------------------- |

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { loginUser, logoutUser } from '../../actions/authenticationActions';
 
-import { Form, Button } from 'semantic-ui-react'
+import { Form, Button, Input } from 'semantic-ui-react'
 
 class Login extends React.Component {
   constructor(props) {
@@ -12,6 +12,7 @@ class Login extends React.Component {
     this.state = {
       username: "",
       password: "",
+      switchInputs: false,
     }
   }
 
@@ -21,38 +22,39 @@ class Login extends React.Component {
   }
 
   handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value })
+    this.setState({ [event.target.name]: event.target.value }, () => console.log(this.state))
   }
 
   render() {
     return (
       <div>
         {!this.props.authentication.isLoggedIn ?
-          (<div>
+          (<div align="center">
             <h2>Login</h2>
-            <Form size="mini" onSubmit={this.handleLogin}>
-              <Form.Group>
-                <Form.Input
+            {!this.state.switchInputs ?
+              <Form size="mini" onSubmit={() => this.setState({ switchInputs: true })}>
+                <Input
                   name="username"
                   value={this.state.username}
                   placeholder="Enter username"
                   onChange={this.handleChange}
-                />
-              </Form.Group>
-              <Form.Group>
-                <Form.Input
+                /><br />
+                <Button type="submit">Login</Button>
+              </Form>
+            :
+              <Form size="mini" onSubmit={this.handleLogin}>
+                <Input
                   name="password"
                   type="password"
                   value={this.state.password}
                   placeholder="Enter password"
                   onChange={this.handleChange}
-                />
-              </Form.Group>
-              {this.props.authentication.error}
-              <Form.Group>
+                /><br />
+                {this.props.authentication.error}
                 <Button type="submit">Login</Button>
-              </Form.Group>
-            </Form>
+                <Button onClick={() => this.setState({ switchInputs: false })} >Switch User</Button>
+              </Form>
+            }
           </div>)
         :
           (<Redirect to='/' />)

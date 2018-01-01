@@ -3,11 +3,9 @@ import { withRouter, Switch, Route, Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import requireAuthentication from '../../hoc/requireAuthentication';
 import NavBar from '../NavBar/NavBar';
-import SignUp from '../Authorization/SignUp';
-import Login from '../Authorization/Login';
-import UsersShow from '../User/UsersShow';
-import UsersIndex from '../User/UsersIndex';
+import UserPage from '../User/UserPage';
 import WolframSearch from '../Wolfram/WolframSearch';
 import WolframResults from '../Wolfram/WolframResults';
 import YoutubePage from '../Youtube/YoutubePage';
@@ -22,13 +20,13 @@ import { getCurrentUser } from '../../actions/userActions';
 import { Sidebar, Segment, Menu, Icon } from 'semantic-ui-react';
 
 
-class App extends React.Component {
+class MainPage extends React.Component {
   constructor(props) {
     super(props);
     if (localStorage.getItem('token')) {
       props.getCurrentUser();
     } else {
-      props.history.push('login');
+      props.history.push('/welcome');
     }
   }
 
@@ -103,10 +101,7 @@ class App extends React.Component {
               <Sidebar.Pusher style={{height: "100%"}}>
                 <Segment style={{height: "100%"}}>
                   <Switch>
-                    <Route exact path="/signup" component={SignUp} />
-                    <Route exact path="/login" component={Login} />
-                    <Route exact path="/users/all" component={UsersIndex} />
-                    <Route exact path="/users/:id/" component={UsersShow} />
+                    <Route path="/user" component={UserPage} />
                     <Route exact path="/wolfram_search" component={WolframSearch} />
                     <Route exact path="/wolfram_results" component={WolframResults} />
                     <Route path="/youtube" component={YoutubePage} />
@@ -121,7 +116,7 @@ class App extends React.Component {
             </Sidebar.Pushable>
             {this.props.sidebar.toggleVisibility ?
               <div style={{position:"absolute", left:"25px", bottom:"25px"}}>
-                <iframe src={`https://open.spotify.com/embed?uri=${this.props.spotify.uri}`} width="250" height="80" allowtransparency="true"></iframe>
+                <iframe src={`https://open.spotify.com/embed?uri=${this.props.spotify.uri}`} title="spotifyplayer" width="250" height="80" allowtransparency="true"></iframe>
               </div>
             :
               null
@@ -135,7 +130,6 @@ class App extends React.Component {
 const mapStateToProps = (state) => {
   return {
     sidebar: state.sidebar,
-    authentication: state.authentication,
     reddit: state.reddit,
     spotify: state.spotify,
   }
@@ -147,7 +141,9 @@ const mapDispatchToProps = (dispatch) => {
   }, dispatch)
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+export default requireAuthentication(
+  withRouter(connect(mapStateToProps, mapDispatchToProps)(MainPage))
+);
 
 // <div style={{position:"absolute", bottom:"0"}}>
 //   <iframe src="https://open.spotify.com/embed?uri=spotify:track:1JDIArrcepzWDTAWXdGYmP" width="250" height="80" frameBorder="0" allowtransparency="true"></iframe>

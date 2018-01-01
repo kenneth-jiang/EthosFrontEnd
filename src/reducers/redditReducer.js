@@ -1,7 +1,7 @@
-import { GET_REDDIT_SELF, GET_REDDIT_FUNNY, GET_REDDIT_AWW, GET_REDDIT_TIL, GET_REDDIT_PICS, GET_REDDIT_POPULAR, GET_REDDIT_POST } from '../actions/actionTypes';
+import { GET_REDDIT_SELF, GET_REDDIT_FUNNY, GET_REDDIT_AWW, GET_REDDIT_TIL, GET_REDDIT_PICS, GET_REDDIT_POPULAR, GET_REDDIT_CUSTOM, GET_REDDIT_POST } from '../actions/actionTypes';
 
 
-const INITIAL_STATE = { isLoggedIn: false, currentUser: {}, aww: {}, til: {}, funny: {}, pics: {}, popular: {}, currentPost: [] };
+const INITIAL_STATE = { isLoggedIn: false, currentUser: {}, aww: {}, til: {}, funny: {}, pics: {}, popular: {}, custom: {}, currentPost: [] };
 
 export default(state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -17,6 +17,8 @@ export default(state = INITIAL_STATE, action) => {
       return {...state, pics: action.payload.results};
     case (GET_REDDIT_POPULAR):
       return {...state, popular: action.payload.results};
+    case (GET_REDDIT_CUSTOM):
+      return {...state, custom: action.payload.results};
     case (GET_REDDIT_POST):
       return {...state, currentPost: action.payload.results};
     default:

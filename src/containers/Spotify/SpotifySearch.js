@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { searchSpotifyTrack, searchSpotifyArtist } from '../../actions/spotifyActions';
-import { Form, Input, Button, Message } from 'semantic-ui-react';
+import { Form, Input, Button } from 'semantic-ui-react';
 
 
 class SpotifySearch extends React.Component {

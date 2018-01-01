@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { signupUser } from '../../actions/authenticationActions';
@@ -66,6 +66,7 @@ class SignUp extends React.Component {
               <Button type='submit'>Sign Up</Button>
               </Form.Group>
             </Form>
+            <Link to={'/welcome'}>Back to Login</Link>
           </div>)
         :
           (<Redirect to='/' />)

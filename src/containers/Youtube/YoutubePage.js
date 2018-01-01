@@ -6,23 +6,19 @@ import YoutubeSearch from './YoutubeSearch';
 import YoutubeResults from './YoutubeResults';
 import YoutubeDetail from './YoutubeDetail';
 
-import { Grid } from 'semantic-ui-react';
+import { Grid, Embed } from 'semantic-ui-react';
 
 
 class YoutubePage extends React.Component {
   renderPlayer = () => {
     const { youtube } = this.props;
-    const embeddedUrl = "http://www.youtube.com/embed/";
     return (
-      <iframe
-        title="youtube"
-        id="player"
-        type="text/html"
+      <Embed
+        id={ (youtube.currentVideo.id !== undefined) ? (youtube.currentVideo.id.videoId) : (null) }
         width="900"
         height="550"
-        src={ (youtube.currentVideo.id !== undefined) ? (embeddedUrl + youtube.currentVideo.id.videoId) : (embeddedUrl) }
-        frameBorder="5">
-      </iframe>
+        source='youtube'
+      />
     )
   }
 

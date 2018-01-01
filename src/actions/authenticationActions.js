@@ -14,7 +14,7 @@ export function signupUser(signData, history) {
           localStorage.setItem('token', data.token);
           dispatch({ type: AUTHORIZE_USER, payload: {currentUser: data, isLoggedIn: true, error: false} });
           dispatch({ type: GET_CURRENT_USER, payload: {currentUser: data }});
-          return history.push('/')
+          return history.push('/signup_info')
         } else {
           return dispatch({ type: ERROR, payload: {error: 'Invalid sign up!'} });
         }

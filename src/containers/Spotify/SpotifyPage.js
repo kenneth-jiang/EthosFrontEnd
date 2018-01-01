@@ -52,7 +52,7 @@ class SpotifyPage extends React.Component {
           <SpotifySearch />
         </Grid.Column>
         <Grid.Column align="center">
-          <iframe src={`https://open.spotify.com/embed?uri=${this.props.spotify.uri}`} width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+          <iframe src={`https://open.spotify.com/embed?uri=${this.props.spotify.uri}`} title="spotifyplayer" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
         </Grid.Column>
         <Grid.Column align="right">
           {this.renderSelf()}

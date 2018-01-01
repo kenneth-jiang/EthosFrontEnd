@@ -1,27 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { getRedditFunny } from '../../actions/redditActions';
 import { Item, Grid } from 'semantic-ui-react';
 import RedditItem from './RedditItem';
 import Loading from '../../components/Loading';
 
-class RedditFunny extends React.Component {
-  componentDidMount() {
-    this.props.getRedditFunny();
-  }
-
+class RedditCustom extends React.Component {
   render() {
-    if (this.props.reddit.funny.data === undefined) {
+    if (this.props.reddit.custom.data === undefined) {
       return <Loading />
     }
-
+    
     return (
       <Grid>
         <Grid.Column>
-          <h3>Reddit Funny</h3>
+          <h3>Reddit Custom</h3>
           <Item.Group divided>
-            {this.props.reddit.funny.data.children.map((post, index) => {
+            {this.props.reddit.custom.data.children.map((post, index) => {
               return (
                 <RedditItem key={index} post={post}/>
               )
@@ -39,4 +34,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getRedditFunny })(RedditFunny);
+export default connect(mapStateToProps)(RedditCustom);
