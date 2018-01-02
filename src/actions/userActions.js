@@ -47,7 +47,6 @@ export function updateUserInfo(userInfo) {
     })
       .then(resp => resp.json())
       .then(data => {
-        console.log("there")
         dispatch({ type: UPDATE_USER_INFO, payload: {currentUser: data} })
       })
   }

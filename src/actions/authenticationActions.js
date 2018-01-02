@@ -47,7 +47,7 @@ export function logoutUser(history) {
   return (dispatch) => {
     localStorage.removeItem('token');
     dispatch({ type: UNAUTHORIZE_USER });
-    return history.push('/login');
+    return history.push('/welcome');
   }
 }
 

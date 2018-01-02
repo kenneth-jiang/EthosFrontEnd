@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { loginUser, logoutUser } from '../../actions/authenticationActions';
 
-import { Form, Button, Input } from 'semantic-ui-react'
+import { Form, Button, Input, Icon } from 'semantic-ui-react'
 
 class Login extends React.Component {
   constructor(props) {
@@ -34,25 +34,27 @@ class Login extends React.Component {
             {!this.state.switchInputs ?
               <Form size="mini" onSubmit={() => this.setState({ switchInputs: true })}>
                 <Input
+                  size="large"
                   name="username"
                   value={this.state.username}
                   placeholder="Enter username"
                   onChange={this.handleChange}
-                /><br />
-                <Button type="submit">Login</Button>
+                />
+                <Button icon type="submit"><Icon name="arrow right" /></Button>
               </Form>
             :
               <Form size="mini" onSubmit={this.handleLogin}>
+                <Button icon type="button" onClick={() => this.setState({ switchInputs: false })}><Icon name="arrow left" /></Button>
                 <Input
+                  size="large"
                   name="password"
                   type="password"
                   value={this.state.password}
                   placeholder="Enter password"
                   onChange={this.handleChange}
-                /><br />
+                /> <br /><br />
                 {this.props.authentication.error}
                 <Button type="submit">Login</Button>
-                <Button onClick={() => this.setState({ switchInputs: false })} >Switch User</Button>
               </Form>
             }
           </div>)

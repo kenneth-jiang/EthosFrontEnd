@@ -1,11 +1,17 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Form, Button, Grid, Image, Input } from 'semantic-ui-react';
 import UserEdit from './UserEdit';
 import UserPreferences from './UserPreferences';
+import UserValues from './UserValues';
+import UserNeeds from './UserNeeds';
+import UserPersonality from './UserPersonality';
+import Loading from '../../components/Loading';
 import { createUserPersonality, showUserPersonality } from '../../actions/personalityActions';
 import { updateUserInfo } from '../../actions/userActions';
+
 // import data from './data2'
 
 class UserShow extends React.Component {
@@ -33,7 +39,7 @@ class UserShow extends React.Component {
     })
   }
 
-  render() {
+  renderUserProfile = () => {
     const { username, first_name, last_name, email, phone, birthday, location, gender, interests, about, profile_pic, status } = this.props.user.currentUser.user;
     return (
       <Grid columns="equal">
@@ -63,11 +69,21 @@ class UserShow extends React.Component {
         <Input placeholder="Update your status"/> <br />
         <Button onClick={() => this.props.createUserPersonality()}>User Personality</Button>
         </Grid.Column>
+        </Grid>
+    )
+  }
+
+  render() {
+    if (!this.props.personality.personalities) { return <Loading /> }
+    return (
         <Switch>
           <Route exact path="/user/:id/edit" component={UserEdit} />
           <Route exact path="/user/:id/preferences" component={UserPreferences} />
+          <Route exact path="/user/:id/values" component={UserValues} />
+          <Route exact path="/user/:id/needs" component={UserNeeds} />
+          <Route exact path="/user/:id/personality" component={UserPersonality} />
+          <Route exact path="/user/:id" render={() => this.renderUserProfile()} />
         </Switch>
-      </Grid>
     )
   }
 }
@@ -75,6 +91,7 @@ class UserShow extends React.Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user,
+    personality: state.personality
   }
 }
 

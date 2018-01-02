@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 
 import Login from '../containers/Authorization/Login';
+import alreadyAuthenticated from '../hoc/alreadyAuthenticated';
 
 
 const Welcome = (props) => {
@@ -18,4 +19,4 @@ const Welcome = (props) => {
   )
 }
 
-export default Welcome;
+export default alreadyAuthenticated(Welcome);

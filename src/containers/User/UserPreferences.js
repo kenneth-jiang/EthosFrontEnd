@@ -1,51 +1,66 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Grid, List, Icon } from 'semantic-ui-react';
 
 import Loading from '../../components/Loading';
 
 
 class UserPreferences extends React.Component {
-  userConsumptionPreference = () => {
-    return (
-      <ol>
-        {this.props.personalities.consumption_preferences.map((parent_category, index) => {
-          return (
-            <li key={index}>
-              <strong>{parent_category.name}</strong> <br />
-              <ol>
-                {parent_category.consumption_preferences.map((child_category, index) => {
-                  return (
-                    <li key={index}>
-                      {child_category.name} <br/>
-                      Score: {child_category.score}
-                    </li>
-                  )
-                })}
-              </ol>
-              <br />
-            </li>
-          )
-        })}
-      </ol>
-    )
+  renderLikelyPreferences = () => {
+    const { consumption_preferences } = this.props.personality.personalities;
+    return consumption_preferences.map((category) => {
+      return category.consumption_preferences.map((preference, index) => {
+        return (preference.score === 1) ? (<List.Item key={index}><Icon name="check" />{`...${preference.name.split('Likely to')[1]}`}</List.Item>) : (null)
+      })
+    })
   }
-  
+
+  renderUnlikelyPreferences = () => {
+    const { consumption_preferences } = this.props.personality.personalities;
+    return consumption_preferences.map((category) => {
+      return category.consumption_preferences.map((preference, index) => {
+        return (preference.score === 0) ? (<List.Item key={index}><Icon name="x" />{`...${preference.name.split('Likely to')[1]}`}</List.Item>) : (null)
+      })
+    })
+  }
+
   render() {
-    if (Object.keys(this.props.personalities).length === 0 && this.props.personalities.constructor === Object) {
-        return <Loading />;
-    }
+    if (this.props.personality.personalities.consumption_preferences === undefined) { return <Loading /> }
 
     return (
-      <div>
-        {this.userConsumptionPreference()}
-      </div>
+      <Grid className="fulldisplay" columns="equal">
+        <Grid.Column width={2}>
+        </Grid.Column>
+        <Grid.Column>
+          <List>
+            <List.Content>
+              <List.Header as="h2" icon="true"><Icon name="smile" /> You are likely to...</List.Header>
+              <List.Item as="ul">
+                {this.renderLikelyPreferences()}
+              </List.Item>
+            </List.Content>
+          </List>
+        </Grid.Column>
+        <Grid.Column>
+          <List>
+            <List.Content>
+              <List.Header as="h2" icon="true"><Icon name="frown" /> You are unlikely to...</List.Header>
+              <List.Item as="ul">
+                {this.renderUnlikelyPreferences()}
+              </List.Item>
+            </List.Content>
+          </List>
+        </Grid.Column>
+        <Grid.Column width={2}>
+        </Grid.Column>
+      </Grid>
     )
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    personalities: state.personality.personalities,
+    personality: state.personality,
   }
 }
 

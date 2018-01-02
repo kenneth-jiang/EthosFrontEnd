@@ -31,7 +31,7 @@ class NewsSources extends React.Component {
               </a>
             </Card.Content>
             <Card.Content extra align="right">
-              <Icon name='heart' corner color="red" onClick={() => this.props.favoriteNewsSource(source)}/>
+              <Icon name='heart' corner color="red" circular onClick={() => this.props.favoriteNewsSource(source)}/>
             </Card.Content>
         </Card>
       )
