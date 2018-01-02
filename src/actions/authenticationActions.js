@@ -1,12 +1,13 @@
 import { backendAPI, headers } from '../services/Adapter';
-import { AUTHORIZE_USER, UNAUTHORIZE_USER, GET_CURRENT_USER, ERROR } from './actionTypes';
+import { AUTHORIZE_USER, UNAUTHORIZE_USER, GET_CURRENT_USER, ERROR, GET_PROFILE_PIC } from './actionTypes';
 
-export function signupUser(signData, history) {
+
+export function signupUser(signupData, history) {
   return (dispatch) => {
     fetch(`${backendAPI}/signup`, {
       method: 'POST',
       headers: headers,
-      body: JSON.stringify(signData)
+      body: JSON.stringify({user: signupData})
     })
       .then(resp => resp.json())
       .then(data => {
@@ -54,5 +55,25 @@ export function logoutUser(history) {
 export function error() {
   return (dispatch) => {
     return dispatch({ type: ERROR });
+  }
+}
+
+export function getProfilePic(username) {
+  return (dispatch) => {
+    return fetch(`${backendAPI}/profile_pic`, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify({username: username})
+     })
+      .then(resp => resp.json())
+      .then(data => {
+        if (!data.error) {
+          console.log(data)
+          return dispatch({ type: GET_PROFILE_PIC, payload: {results: data.profile_pic} })
+        } else {
+          console.log(data)
+          return dispatch({ type: ERROR, payload: {error: data} });
+        }
+      })
   }
 }

@@ -1,10 +1,11 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { loginUser, logoutUser } from '../../actions/authenticationActions';
+import { Form, Button, Input, Icon, Image } from 'semantic-ui-react'
 
-import { Form, Button, Input, Icon } from 'semantic-ui-react'
+import { loginUser, getProfilePic } from '../../actions/authenticationActions';
+import alreadyAuthenticated from '../../hoc/alreadyAuthenticated';
+
 
 class Login extends React.Component {
   constructor(props) {
@@ -25,42 +26,51 @@ class Login extends React.Component {
     this.setState({ [event.target.name]: event.target.value }, () => console.log(this.state))
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.props.getProfilePic(this.state.username);
+    this.setState({ switchInputs: true });
+  }
+
   render() {
     return (
-      <div>
-        {!this.props.authentication.isLoggedIn ?
-          (<div align="center">
-            <h2>Login</h2>
-            {!this.state.switchInputs ?
-              <Form size="mini" onSubmit={() => this.setState({ switchInputs: true })}>
-                <Input
-                  size="large"
-                  name="username"
-                  value={this.state.username}
-                  placeholder="Enter username"
-                  onChange={this.handleChange}
-                />
-                <Button icon type="submit"><Icon name="arrow right" /></Button>
-              </Form>
-            :
-              <Form size="mini" onSubmit={this.handleLogin}>
-                <Button icon type="button" onClick={() => this.setState({ switchInputs: false })}><Icon name="arrow left" /></Button>
-                <Input
-                  size="large"
-                  name="password"
-                  type="password"
-                  value={this.state.password}
-                  placeholder="Enter password"
-                  onChange={this.handleChange}
-                /> <br /><br />
-                {this.props.authentication.error}
-                <Button type="submit">Login</Button>
-              </Form>
-            }
-          </div>)
+      <div align="center" className="fulldisplay" style={{backgroundImage: "url('https://i.pinimg.com/originals/74/86/0d/74860d725facc1a763261b4fd10c3a12.jpg')", backgroundSize: "cover"}}>
+        <br /><br />
+        <h1 style={{color:"white"}}>Welcome to Ethos!</h1>
+        <br /><br /><br /><br /><br />
+        <Image size="small" bordered circular src={this.props.authentication.profile_pic || "https://success.salesforce.com/resource/tdxlib/img/default-user.png"} />
+        <br />
+        {!this.state.switchInputs ?
+          <Form size="mini" onSubmit={this.handleSubmit}>
+            <Input
+              size="large"
+              name="username"
+              value={this.state.username}
+              placeholder="Enter username"
+              onChange={this.handleChange}
+            />
+            <Button icon type="submit"><Icon name="arrow right" /></Button>
+            <br /><br />
+            <Button disabled>Login</Button>
+          </Form>
         :
-          (<Redirect to='/' />)
+          <Form size="mini" onSubmit={this.handleLogin}>
+            <Button icon type="button" onClick={() => this.setState({ switchInputs: false })}><Icon name="arrow left" /></Button>
+            <Input
+              size="large"
+              name="password"
+              type="password"
+              value={this.state.password}
+              placeholder="Enter password"
+              onChange={this.handleChange}
+            /> <br />
+            {this.props.authentication.error}
+            <br />
+            <Button type="submit">Login</Button>
+          </Form>
         }
+        <br /><br /><br />
+        Don&apos;t have an account? Sign up <Link to={'/signup'} >here</Link>!
       </div>
     )
   }
@@ -72,11 +82,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    loginUser: loginUser,
-    logoutUser: logoutUser,
-  }, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default alreadyAuthenticated(connect(mapStateToProps, { loginUser, getProfilePic })(Login));

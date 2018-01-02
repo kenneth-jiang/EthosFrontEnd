@@ -17,26 +17,6 @@ class NavBar extends React.Component {
             Toggle SideBar
           </Button>
         </Menu.Item>
-        <Menu.Item>
-          <Link to='/'>
-            Main
-          </Link>
-        </Menu.Item>
-        <Menu.Item>
-          <Link to='/signup'>
-            Sign Up
-          </Link>
-        </Menu.Item>
-        <Menu.Item>
-          <Link to='/wolfram_search'>
-            Wolfram
-          </Link>
-        </Menu.Item>
-        <Menu.Item>
-          <Link to='/wolfram_results'>
-            Results
-          </Link>
-        </Menu.Item>
         {!this.props.authentication.isLoggedIn || !this.props.user.currentUser.user ?
         <Menu.Item position='right'>
           <Link to='/login'>
