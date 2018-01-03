@@ -1,10 +1,10 @@
 import { backendAPI, headers } from '../services/Adapter';
-import { GET_CURRENT_USER, GET_ALL_USERS, UPDATE_USER_INFO } from './actionTypes';
+import { GET_CURRENT_USER, GET_ALL_USERS, UPDATE_USER_INFO, GET_USER_FAVORITES } from './actionTypes';
 
 export function getCurrentUser() {
   return (dispatch) => {
     return fetch(`${backendAPI}/current_user`, {
-      headers: headers,
+      headers: Object.assign({}, headers, {token: localStorage.getItem('token')}) // this is correct, don't change it
     })
       .then(resp => resp.json())
       .then(data => dispatch({ type: GET_CURRENT_USER, payload: {currentUser: data} }))
@@ -38,7 +38,6 @@ export function signupUserInfo(userInfo, history) {
 }
 
 export function updateUserInfo(userInfo) {
-  console.log(userInfo)
   return (dispatch) => {
     return fetch(`${backendAPI}/update_user`, {
       method: 'POST',
@@ -48,6 +47,19 @@ export function updateUserInfo(userInfo) {
       .then(resp => resp.json())
       .then(data => {
         dispatch({ type: UPDATE_USER_INFO, payload: {currentUser: data} })
+      })
+  }
+}
+
+export function getUserFavorites() {
+  return (dispatch) => {
+    return fetch(`${backendAPI}/user_favorites`, {
+      headers: headers
+    })
+      .then(resp => resp.json())
+      .then(data => {
+        console.log(data)
+        dispatch({ type: GET_USER_FAVORITES, payload: {favorites: data.favorites }})
       })
   }
 }

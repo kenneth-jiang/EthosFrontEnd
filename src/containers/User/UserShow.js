@@ -10,9 +10,8 @@ import UserNeeds from './UserNeeds';
 import UserPersonality from './UserPersonality';
 import Loading from '../../components/Loading';
 import { createUserPersonality, showUserPersonality } from '../../actions/personalityActions';
-import { updateUserInfo } from '../../actions/userActions';
+import { updateUserInfo, getUserFavorites } from '../../actions/userActions';
 
-// import data from './data2'
 
 class UserShow extends React.Component {
   constructor() {
@@ -58,6 +57,7 @@ class UserShow extends React.Component {
         <Grid.Column align="right">
         {status}
         <Image onClick={() => this.setState({ updatePictureInput: !this.state.updatePictureInput })} size="small" circular src={profile_pic || "https://success.salesforce.com/resource/tdxlib/img/default-user.png"} />
+        <Button onClick={() => this.props.getUserFavorites()}>Favorites</Button>
         {this.state.updatePictureInput ?
           <Form onSubmit={this.handleSubmit}>
             <Form.Input placeholder="Update profile picture" value={this.state.profile_pic} onChange={this.handleChange} />
@@ -95,7 +95,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { createUserPersonality, showUserPersonality, updateUserInfo })(UserShow);
+export default connect(mapStateToProps, { createUserPersonality, showUserPersonality, updateUserInfo, getUserFavorites })(UserShow);
 
 // import Sunburst from 'react-sunburst-d3-v4';
 // <Sunburst

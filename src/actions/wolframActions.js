@@ -9,9 +9,16 @@ export function getWolframSearch(searchData, history) {
       body: JSON.stringify({search_term: searchData})
     })
       .then(resp => resp.json())
-      .then(data => {
-        dispatch({ type: WOLFRAM_SEARCH, payload: {results: data} })
-        return history.push('/wolfram_results')
-      })
+      .then(data => dispatch({ type: WOLFRAM_SEARCH, payload: {results: data} }))
+  }
+}
+
+export function favoriteWolfram(favoriteData) {
+  return (dispatch) => {
+    return fetch(`${backendAPI}/wolfram_favorite`, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify(favoriteData)
+    })
   }
 }

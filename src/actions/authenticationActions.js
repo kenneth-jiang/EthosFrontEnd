@@ -48,7 +48,7 @@ export function logoutUser(history) {
   return (dispatch) => {
     localStorage.removeItem('token');
     dispatch({ type: UNAUTHORIZE_USER });
-    return history.push('/welcome');
+    return history.push('/login');
   }
 }
 
@@ -72,7 +72,7 @@ export function getProfilePic(username) {
           return dispatch({ type: GET_PROFILE_PIC, payload: {results: data.profile_pic} })
         } else {
           console.log(data)
-          return dispatch({ type: ERROR, payload: {error: data} });
+          return dispatch({ type: ERROR, payload: {error: data.error} });
         }
       })
   }

@@ -8,10 +8,11 @@ import { toggleSideBarVisibility } from '../../actions/sidebarActions';
 import { NavLink, Link } from 'react-router-dom';
 import { Button, Menu, Dropdown, Icon } from 'semantic-ui-react';
 
+
 class NavBar extends React.Component {
   render () {
     return (
-      <Menu attached='top' inverted compact>
+      <Menu color="teal" attached='top' inverted compact>
         <Menu.Item>
           <Button onClick={this.props.toggleSideBarVisibility}>
             <Icon name="sidebar" />

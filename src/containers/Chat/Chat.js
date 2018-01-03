@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import ActionCable from 'actioncable';
 import moment from 'moment';
-import { Grid, Form, Button, Segment, Image, Item, Input } from "semantic-ui-react";
+import { Grid, Form, Segment } from "semantic-ui-react";
 
 import { getAllMessages, sendMessage } from '../../actions/chatActions';
 import Loading from '../../components/Loading';
@@ -20,6 +20,11 @@ class Chat extends React.Component {
 
   componentDidMount() {
     this.props.getAllMessages();
+    this.timer = setInterval(() => this.props.getAllMessages().then(this.setState({ chats: [] })), 10000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
   }
 
   subscribeChannel = () => {
@@ -45,15 +50,14 @@ class Chat extends React.Component {
 
   render() {
     if (!this.props.chat.messages || !this.props.user.currentUser.user) { return <Loading /> }
-    const { message } = this.state;
-    const { username, id } = this.props.user.currentUser.user;
+
     return (
       <Grid>
         <Grid.Column width={4} align="center">
           <br /><br /><br />
         </Grid.Column>
         <Grid.Column width={8}>
-          <h4 align="center">Connected as: {username}</h4>
+          <h4 align="center">{this.props.user.currentUser.user.username}, you have {this.props.chat.messages.filter(message => message.username === this.props.user.currentUser.user.username).length} active messages.</h4>
           <br />
           <Form align="center" onSubmit={this.handleSubmit}>
             <Form.Group>

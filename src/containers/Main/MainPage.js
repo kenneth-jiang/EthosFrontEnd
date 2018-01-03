@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter, Switch, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Sidebar, Segment, Menu, Icon } from 'semantic-ui-react';
+import { Sidebar, Grid, Segment, Menu, Icon, Image } from 'semantic-ui-react';
 
 import { getCurrentUser } from '../../actions/userActions';
 import requireAuthentication from '../../hoc/requireAuthentication';
@@ -9,8 +9,9 @@ import NavBar from '../NavBar/NavBar';
 import Chat from '../Chat/Chat';
 
 import UserPage from '../User/UserPage';
-import WolframSearch from '../Wolfram/WolframSearch';
-import WolframResults from '../Wolfram/WolframResults';
+import WolframPage from '../Wolfram/WolframPage';
+// import WolframSearch from '../Wolfram/WolframSearch';
+// import WolframResults from '../Wolfram/WolframResults';
 import YoutubePage from '../Youtube/YoutubePage';
 import NewsPage from '../News/NewsPage';
 import RedditPage from '../Reddit/RedditPage';
@@ -21,20 +22,14 @@ import NotFound from '../../components/NotFound';
 
 
 class MainPage extends React.Component {
-  constructor(props) {
-    super(props);
+  componentDidMount() {
     if (localStorage.getItem('token')) {
-      props.getCurrentUser();
+      this.props.getCurrentUser();
     } else {
-      props.history.push('/login');
+      this.props.history.push('/login');
     }
   }
 
-  renderMotionMenu = () => {
-    return (
-      "Hello"
-    )
-  }
 
   render() {
     return (
@@ -56,8 +51,8 @@ class MainPage extends React.Component {
                 </Link>
               </Menu.Item>
               <Menu.Item>
-                <Icon name='search' />
-                <Link to="/wolfram_search">
+                <Icon name="search" />
+                <Link to="/wolfram">
                   Wolfram
                 </Link>
               </Menu.Item>
@@ -108,16 +103,15 @@ class MainPage extends React.Component {
               <Segment className="fulldisplay">
                 <Switch>
                   <Route path="/user" component={UserPage} />
-                  <Route exact path="/wolfram_search" component={WolframSearch} />
-                  <Route exact path="/wolfram_results" component={WolframResults} />
-                  <Route path="/youtube" component={YoutubePage} />
+                  <Route exact path="/chat" component={Chat} />
+                  <Route exact path="/wolfram" component={WolframPage} />
                   <Route path="/news" component={NewsPage} />
+                  <Route path="/youtube" component={YoutubePage} />
                   <Route path="/reddit" component={RedditPage} />
                   <Route path="/spotify" component={SpotifyPage} />
                   <Route exact path="/reddit_authorization" component={RedditAuthorization} />
                   <Route exact path="/spotify_authorization" component={SpotifyAuthorization} />
-                  <Route exact path="/chat" component={Chat} />
-                  <Route exact path="/" render={() => this.renderMotionMenu()} />
+                  <Route exact path="/" render={() => "hello"} />
                   <Route component={NotFound} />
                 </Switch>
               </Segment>
@@ -139,6 +133,7 @@ class MainPage extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    authentication: state.authentication,
     sidebar: state.sidebar,
     reddit: state.reddit,
     spotify: state.spotify,

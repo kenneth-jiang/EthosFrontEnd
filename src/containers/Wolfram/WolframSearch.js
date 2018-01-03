@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { Form } from 'semantic-ui-react';
 
 import { getWolframSearch } from '../../actions/wolframActions';
-import { Button, Form, Input } from 'semantic-ui-react';
+
 
 class WolframSearch extends React.Component {
   constructor(props) {
@@ -13,9 +13,7 @@ class WolframSearch extends React.Component {
     }
   }
 
-  handleChange = (event) => {
-    this.setState({ searchTerm: event.target.value })
-  }
+  handleChange = (event) => this.setState({ searchTerm: event.target.value });
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -25,20 +23,15 @@ class WolframSearch extends React.Component {
   render() {
     return (
       <div>
-        <h2>To start, ask a question or search for a topic!</h2>
+        <h2>Ask a question or search for a topic!</h2>
         <Form onSubmit={this.handleSubmit}>
-          <Input onChange={this.handleChange} />
-          <Button>Search</Button>
+          <Form.Group>
+            <Form.Input width={16} onChange={this.handleChange} action={"Beep Boop!"}/>
+          </Form.Group>
         </Form>
       </div>
     )
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    getWolframSearch,
-  }, dispatch)
-}
-
-export default connect(null, mapDispatchToProps)(WolframSearch);
+export default connect(null, { getWolframSearch })(WolframSearch);

@@ -8,6 +8,7 @@ export const GET_PROFILE_PIC = "GET_PROFILE_PIC";
 export const GET_CURRENT_USER = "GET_CURRENT_USER";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const UPDATE_USER_INFO = "UPDATE_USER_INFO";
+export const GET_USER_FAVORITES = "GET_USER_FAVORITES";
 
 // SideBar Actions ----------------------------------------------------------- |
 export const TOGGLE_SIDEBAR_VISIBLITY = "TOGGLE_SIDEBAR_VISIBLITY";

@@ -1,40 +1,42 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Grid, Segment, Image, Icon } from 'semantic-ui-react'
 
-import Loading from '../../components/Loading';
+import { favoriteWolfram } from '../../actions/wolframActions';
+import { addClickTerm } from '../../actions/clickActions';
 
-import { Image } from 'semantic-ui-react'
 
 class WolframResults extends React.Component {
-  renderResults = () => {
-    // this.props.search ? this.props.search.results.queryresult.pods.map(pod => <Image src={pod.subpods[0].img.src} />) : null;
-    if (this.props !== undefined) {
-      if (this.props.wolfram !== undefined) {
-        if (this.props.wolfram.results !== undefined) {
-          if (this.props.wolfram.results.queryresult !== undefined) {
-            if (this.props.wolfram.results.queryresult.pods !== undefined) {
-              return this.props.wolfram.results.queryresult.pods.map((pod, index) => {
-                return (<Image key={index} src={pod.subpods[0].img.src} />)
-              })
-            }
-          }
-        }
-      }
-    }
-  }
-
   render() {
-    if (!this.props.wolfram.results) {
-      return <Loading />
-    }
-
+    const { queryresult } = this.props.wolfram.results;
     return (
-      <div className="fulldisplay" style={{height: "100%"}}>
-        <div align="center">
-          <h2>Results</h2>
-          {this.renderResults()}
-        </div>
-      </div>
+      <Grid className="fulldisplay">
+        <Grid.Column width={12}>
+          <div style={{float:"right"}}>
+            <Icon circular name="heart" color="red" align="right" onClick={() => this.props.favoriteWolfram(queryresult)} />
+          </div> <br /><br />
+          {queryresult.pods.map((pod, index) => {
+            return (
+              <Segment key={index}>
+                {pod.title} <br /><br />
+                <Image src={pod.subpods[0].img.src} />
+              </Segment>
+            )
+          })}
+        </Grid.Column>
+        <Grid.Column width={4}>
+          {queryresult.sources ? <h2 align="center">Sources</h2> : null}
+          {queryresult.sources.map((source, index) => {
+            return (
+              <li key={index}>
+                <a href={source.url} onClick={() => this.props.addClickTerm(source.text)}>
+                  {source.text}
+                </a>
+              </li>
+            )
+          })}
+        </Grid.Column>
+      </Grid>
     )
   }
 }
@@ -45,9 +47,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(WolframResults);
-
-
-// {(this.props !== undefined && this.props.data.search.results.queryResults !== undefined) ? props.data.search.results.queryResults.pods.map((pod) => {
-//   return (<div><Image src={pod.subpods[0].img.src} /></div>)
-// }) : null}
+export default connect(mapStateToProps, { favoriteWolfram, addClickTerm })(WolframResults);

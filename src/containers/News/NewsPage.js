@@ -1,19 +1,19 @@
 import React from 'react';
 import { withRouter, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Segment, Grid } from 'semantic-ui-react'
 
-import NewsSources from './NewsSources';
 import NewsSearch from './NewsSearch';
 import NewsResults from './NewsResults';
+import NewsSources from './NewsSources';
 
-import { Segment, Grid } from 'semantic-ui-react'
 
 class NewsPage extends React.Component {
   renderNewsPage = () => {
     return (
       <div>
-        <Segment align="center">
-          <NewsSearch />
+        <Segment className="fulldisplay" align="center">
+          <NewsSearch history={this.props.history} />
         </Segment>
         {this.props.news.results ?
           <Grid width={10}>
@@ -27,14 +27,11 @@ class NewsPage extends React.Component {
   }
 
   render() {
-    const { match } = this.props;
     return (
-      <div className="fulldisplay">
-        <Switch>
-          <Route exact path={match.url} component={this.renderNewsPage} />
-          <Route exact path={`${match.url}/sources`} component={NewsSources} />
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path={'/news/sources'} component={NewsSources} />
+        <Route exact path={'/news'} render={this.renderNewsPage} />
+      </Switch>
     )
   }
 }
