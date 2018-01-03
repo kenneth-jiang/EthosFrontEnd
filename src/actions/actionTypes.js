@@ -48,3 +48,6 @@ export const SPOTIFY_SEARCH_TRACK = "SPOTIFY_SEARCH_TRACK";
 export const SPOTIFY_SEARCH_ARTIST = "SPOTIFY_SEARCH_ARTIST";
 export const SPOTIFY_SET_URI = "SPOTIFY_SET_URI";
 export const SPOTIFY_ARTIST_TRACKS = "SPOTIFY_ARTIST_TRACKS";
+
+// Chat Actions -------------------------------------------------------------- |
+export const USER_MESSAGES = "USER_MESSAGES";

@@ -1,4 +1,4 @@
-html, body, #root, .App, .fulldisplay {
+html, body, #root, .App, .MainPage, .Chat, .fulldisplay {
   height: 100%;
   width: 100%;
   overflow: auto;

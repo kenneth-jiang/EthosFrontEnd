@@ -14,7 +14,7 @@ class NavBar extends React.Component {
       <Menu attached='top' inverted compact>
         <Menu.Item>
           <Button onClick={this.props.toggleSideBarVisibility}>
-            Toggle SideBar
+            <Icon name="sidebar" />
           </Button>
         </Menu.Item>
         {!this.props.authentication.isLoggedIn || !this.props.user.currentUser.user ?
@@ -49,6 +49,7 @@ const mapStateToProps = (state) => {
   return {
     authentication: state.authentication,
     user: state.user,
+    sidebar: state.sidebar
   }
 }
 

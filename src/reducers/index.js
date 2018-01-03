@@ -10,6 +10,7 @@ import newsReducer from './newsReducer';
 import farooReducer from './farooReducer';
 import redditReducer from './redditReducer';
 import spotifyReducer from './spotifyReducer';
+import chatReducer from './chatReducer';
 
 
 export default combineReducers({
@@ -23,4 +24,5 @@ export default combineReducers({
   faroo: farooReducer,
   reddit: redditReducer,
   spotify: spotifyReducer,
+  chat: chatReducer,
 });

@@ -38,7 +38,7 @@ class Login extends React.Component {
         <br /><br />
         <h1 style={{color:"white"}}>Welcome to Ethos!</h1>
         <br /><br /><br /><br /><br />
-        <Image size="small" bordered circular src={this.props.authentication.profile_pic || "https://success.salesforce.com/resource/tdxlib/img/default-user.png"} />
+        <Image size="small" bordered circular src={(this.props.authentication.profile_pic ? this.props.authentication.profile_pic : null) || "https://success.salesforce.com/resource/tdxlib/img/default-user.png"} />
         <br />
         {!this.state.switchInputs ?
           <Form size="mini" onSubmit={this.handleSubmit}>

@@ -25,7 +25,7 @@ class WolframSearch extends React.Component {
   render() {
     return (
       <div>
-        <h2>Search</h2>
+        <h2>To start, ask a question or search for a topic!</h2>
         <Form onSubmit={this.handleSubmit}>
           <Input onChange={this.handleChange} />
           <Button>Search</Button>

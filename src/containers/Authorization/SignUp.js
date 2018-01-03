@@ -42,7 +42,7 @@ class SignUp extends React.Component {
           <div className="fulldisplay" align="center" style={{backgroundImage: "url(http://www.wallpaperawesome.com/wallpapers-awesome/wallpapers-planets-stars-galaxies-nebulae-sci-fi-awesome/wallpaper-azure-planet.jpg)", backgroundSize: "cover" }}>
             <br /><br />
             <h1 style={{color:"white"}}>Welcome to Ethos!</h1>
-            <br /><br />
+            <br /><br /><br /><br /><br /><br />
             <h3 style={{color:"silver"}}>Please create a new account!</h3>
             <br />
             <Form size="small">
