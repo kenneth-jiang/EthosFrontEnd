@@ -28,7 +28,7 @@ class UserPreferences extends React.Component {
     if (this.props.personality.personalities.consumption_preferences === undefined) { return <Loading /> }
 
     return (
-      <Grid className="fulldisplay" columns="equal">
+      <Grid columns="equal">
         <Grid.Column width={2}>
         </Grid.Column>
         <Grid.Column>

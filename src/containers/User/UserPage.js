@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router';
 
 import UserShow from './UserShow';
-import UserAll from './UserAll';
 import Loading from '../../components/Loading';
 
 

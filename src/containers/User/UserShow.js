@@ -1,24 +1,28 @@
 import React from 'react';
-import { Switch, Route } from 'react-router';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Form, Button, Grid, Image, Input } from 'semantic-ui-react';
-import UserEdit from './UserEdit';
-import UserPreferences from './UserPreferences';
+import { Segment, Form, Button, Grid, Image, Menu, Card } from 'semantic-ui-react';
+
+import { createUserPersonality, showUserPersonality } from '../../actions/personalityActions';
+import { updateUserInfo } from '../../actions/userActions';
+import UserPersonality from './UserPersonality';
 import UserValues from './UserValues';
 import UserNeeds from './UserNeeds';
-import UserPersonality from './UserPersonality';
+import UserPreferences from './UserPreferences';
 import Loading from '../../components/Loading';
-import { createUserPersonality, showUserPersonality } from '../../actions/personalityActions';
-import { updateUserInfo, getUserFavorites } from '../../actions/userActions';
 
 
 class UserShow extends React.Component {
   constructor() {
     super();
     this.state = {
+      activeItem: "",
       profile_pic: "",
       updatePictureInput: false,
+      status: "",
+      renderPersonality: false,
+      renderNeeds: false,
+      renderValues: false,
+      renderPreferences: false,
     }
   }
 
@@ -27,63 +31,97 @@ class UserShow extends React.Component {
   }
 
   handleChange = (event) => {
-    this.setState({ profile_pic: event.target.value })
+    this.setState({ [event.target.name]: event.target.value })
   }
 
-  handleSubmit = (event) => {
+  handlePictureSubmit = (event) => {
     event.preventDefault();
     this.props.updateUserInfo(this.state)
-    this.setState({ updatePictureInput: !this.state.updatePictureInput }, () => {
-      this.setState({ profile_pic: "" })
+    this.setState({
+      updatePictureInput: !this.state.updatePictureInput,
+      profile_pic: "",
     })
   }
 
-  renderUserProfile = () => {
-    const { username, first_name, last_name, email, phone, birthday, location, gender, interests, about, profile_pic, status } = this.props.user.currentUser.user;
-    return (
-      <Grid columns="equal">
-        <Grid.Column>
-        {`${username}'s Profile Page!`} <br /><br />
-          First Name: {first_name} <br />
-          Last Name: {last_name} <br />
-          E-mail: {email} <br />
-          Phone: {phone} <br />
-          Birthday: {birthday} <br />
-          Location: {location} <br />
-          Gender: {gender} <br />
-          Interests: {interests} <br />
-          About: {about} <br />
-        </Grid.Column>
-        <Grid.Column align="right">
-        {status}
-        <Image onClick={() => this.setState({ updatePictureInput: !this.state.updatePictureInput })} size="small" circular src={profile_pic || "https://success.salesforce.com/resource/tdxlib/img/default-user.png"} />
-        <Button onClick={() => this.props.getUserFavorites()}>Favorites</Button>
-        {this.state.updatePictureInput ?
-          <Form onSubmit={this.handleSubmit}>
-            <Form.Input placeholder="Update profile picture" value={this.state.profile_pic} onChange={this.handleChange} />
-            <Button type="submit">Submit</Button>
-          </Form>
-        :
-          null
-        }
-        <Input placeholder="Update your status"/> <br />
-        <Button onClick={() => this.props.createUserPersonality()}>User Personality</Button>
-        </Grid.Column>
-        </Grid>
-    )
+  handleStatusSubmit = (event) => {
+    event.preventDefault();
+    this.props.updateUserInfo({status: this.state.status});
+    this.setState({ status: "" });
+  }
+
+  handlePersonality = (event) => {
+    this.setState({ activeItem: "personality", renderPersonality: true, renderNeeds: false, renderValues: false, renderPreferences: false })
+  }
+
+  handleNeeds = (event) => {
+    this.setState({ activeItem: "needs", renderPersonality: false, renderNeeds: true, renderValues: false, renderPreferences: false })
+  }
+
+  handleValues = (event) => {
+    this.setState({ activeItem: "values", renderPersonality: false, renderNeeds: false, renderValues: true, renderPreferences: false })
+  }
+
+  handlePreferences = (event) => {
+    this.setState({ activeItem: "preferences", renderPersonality: false, renderNeeds: false, renderValues: false, renderPreferences: true })
   }
 
   render() {
     if (!this.props.personality.personalities) { return <Loading /> }
+
+    const { profile_pic, status } = this.props.user.currentUser.user;
     return (
-        <Switch>
-          <Route exact path="/user/:id/edit" component={UserEdit} />
-          <Route exact path="/user/:id/preferences" component={UserPreferences} />
-          <Route exact path="/user/:id/values" component={UserValues} />
-          <Route exact path="/user/:id/needs" component={UserNeeds} />
-          <Route exact path="/user/:id/personality" component={UserPersonality} />
-          <Route exact path="/user/:id" render={() => this.renderUserProfile()} />
-        </Switch>
+      <div>
+        <Grid columns="equal">
+          <Grid.Column stretched width={12} align="right">
+            <Segment>
+              <Segment align="left">
+                {status}
+              </Segment>
+              <Form onSubmit={this.handleStatusSubmit}>
+                <Form.TextArea name="status" onChange={this.handleChange} value={this.state.status} placeholder='How are you feeling?' autoHeight rows={2} />
+                <Form.Button type="submit">Submit</Form.Button>
+              </Form>
+            </Segment>
+          </Grid.Column>
+          <Grid.Column width={4}>
+            <Segment align="center">
+              <Menu fluid vertical tabular='right'>
+                {this.state.updatePictureInput ?
+                  <Form onSubmit={this.handlePictureSubmit}>
+                    <Form.Input name="profile_pic" placeholder="Update profile picture" value={this.state.profile_pic} onChange={this.handleChange} action={"Update"}/>
+                  </Form>
+                :
+                  null
+                }
+                <Card align="center">
+                  <Image onClick={() => this.setState({ updatePictureInput: !this.state.updatePictureInput })} size="small" rounded src={profile_pic || "https://success.salesforce.com/resource/tdxlib/img/default-user.png"} />
+                  <Card.Content>
+                    <Button size="tiny" onClick={() => this.props.createUserPersonality()}>Update Personality</Button>
+                  </Card.Content>
+                </Card>
+                <Menu.Menu>
+                  <Menu.Item name='personality' active={this.state.activeItem === 'personality'} onClick={this.handlePersonality}>
+                    Personality
+                  </Menu.Item>
+                  <Menu.Item name='needs' active={this.state.activeItem === 'needs'} onClick={this.handleNeeds}>
+                    Needs
+                  </Menu.Item>
+                  <Menu.Item name='values' active={this.state.activeItem === 'values'} onClick={this.handleValues}>
+                    Values
+                  </Menu.Item>
+                  <Menu.Item name='preferences' active={this.state.activeItem === 'preferences'} onClick={this.handlePreferences}>
+                    Preferences
+                  </Menu.Item>
+                </Menu.Menu>
+              </Menu>
+            </Segment>
+          </Grid.Column>
+        </Grid>
+        {this.state.renderPersonality ? <Segment><UserPersonality /></Segment> : null}
+        {this.state.renderNeeds ? <Segment><UserNeeds /></Segment> : null}
+        {this.state.renderValues ? <Segment><UserValues /></Segment> : null}
+        {this.state.renderPreferences ? <Segment><UserPreferences /></Segment> : null}
+      </div>
     )
   }
 }
@@ -95,7 +133,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { createUserPersonality, showUserPersonality, updateUserInfo, getUserFavorites })(UserShow);
+export default connect(mapStateToProps, { createUserPersonality, showUserPersonality, updateUserInfo })(UserShow);
 
 // import Sunburst from 'react-sunburst-d3-v4';
 // <Sunburst

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Grid, Form, Input, Button, Image } from 'semantic-ui-react';
+import { Grid, Form, Button, Image } from 'semantic-ui-react';
 
 import { searchSpotifyTrack, searchSpotifyArtist, searchSpotifyPlaylists, getSpotifyFeaturedPlaylists } from '../../actions/spotifyActions';
 
@@ -23,6 +23,7 @@ class SpotifySearch extends React.Component {
     return (
       <Grid>
         <Grid.Column width={6}>
+          <br />
           <Image src="http://wfarm2.dataknet.com/static/resources/icons/set112/ec7816a7.png" /> <br />
         </Grid.Column>
         <Grid.Column width={10}>

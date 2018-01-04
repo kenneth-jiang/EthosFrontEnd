@@ -68,10 +68,8 @@ export function getProfilePic(username) {
       .then(resp => resp.json())
       .then(data => {
         if (!data.error) {
-          console.log(data)
           return dispatch({ type: GET_PROFILE_PIC, payload: {results: data.profile_pic} })
         } else {
-          console.log(data)
           return dispatch({ type: ERROR, payload: {error: data.error} });
         }
       })

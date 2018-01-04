@@ -22,9 +22,7 @@ class Login extends React.Component {
     this.props.loginUser({ user: this.state }, this.props.history);
   }
 
-  handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value }, () => console.log(this.state))
-  }
+  handleChange = (event) => this.setState({ [event.target.name]: event.target.value });
 
   handleSubmit = (event) => {
     event.preventDefault();

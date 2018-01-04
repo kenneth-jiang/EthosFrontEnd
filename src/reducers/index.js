@@ -7,7 +7,6 @@ import personalityReducer from './personalityReducer';
 import wolframReducer from './wolframReducer';
 import youtubeReducer from './youtubeReducer';
 import newsReducer from './newsReducer';
-import farooReducer from './farooReducer';
 import redditReducer from './redditReducer';
 import spotifyReducer from './spotifyReducer';
 import chatReducer from './chatReducer';
@@ -21,7 +20,6 @@ export default combineReducers({
   wolfram: wolframReducer,
   youtube: youtubeReducer,
   news: newsReducer,
-  faroo: farooReducer,
   reddit: redditReducer,
   spotify: spotifyReducer,
   chat: chatReducer,

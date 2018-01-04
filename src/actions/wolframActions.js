@@ -18,7 +18,7 @@ export function favoriteWolfram(favoriteData) {
     return fetch(`${backendAPI}/wolfram_favorite`, {
       method: 'POST',
       headers: headers,
-      body: JSON.stringify(favoriteData)
+      body: JSON.stringify( {wolfram_data: favoriteData })
     })
   }
 }

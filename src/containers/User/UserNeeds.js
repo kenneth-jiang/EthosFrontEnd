@@ -96,8 +96,6 @@ class UserNeeds extends React.Component {
     const needNames = needs.map((need) => need.name);
     const needScores = needs.map((need) => (need.raw_score * 100).toFixed(1));
     const needPercentile = needs.map((need) => (need.percentile * 100).toFixed(1));
-    const color = ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)', 'rgba(0,255,255, 0.2)','rgba(229, 253, 134, 0.5)', 'rgba(134, 212, 253, 0.47)', 'rgba(134, 140, 253, 0.47)', 'rgba(254, 200, 234, 0.5)', 'rgba(31, 35, 1, 0.15)']
-    const borderColor = ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)', 'rgba(0,255,255, 1)','rgba(229, 253, 134, 1)', 'rgba(134, 212, 253, 1)', 'rgba(134, 140, 253, 1)', 'rgba(254, 200, 234, 1)', 'rgba(31, 35, 1, 1)']
 
     const data = {
       labels: needNames,
@@ -140,7 +138,7 @@ class UserNeeds extends React.Component {
     const { selectedBarchart, selectedPolar, selectedRadar } = this.state;
 
     return (
-      <Grid className="fulldisplay">
+      <Grid>
         <Grid.Column width={3}>
         </Grid.Column>
         <Grid.Column width={10}>

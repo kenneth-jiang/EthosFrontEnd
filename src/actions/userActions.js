@@ -22,7 +22,6 @@ export function getAllUsers() {
 }
 
 export function signupUserInfo(userInfo, history) {
-  console.log(userInfo, history)
   return (dispatch) => {
     return fetch(`${backendAPI}/update_user`, {
       method: 'POST',
@@ -57,9 +56,6 @@ export function getUserFavorites() {
       headers: headers
     })
       .then(resp => resp.json())
-      .then(data => {
-        console.log(data)
-        dispatch({ type: GET_USER_FAVORITES, payload: {favorites: data.favorites }})
-      })
+      .then(data => dispatch({ type: GET_USER_FAVORITES, payload: {favorites: data.favorites }}))
   }
 }

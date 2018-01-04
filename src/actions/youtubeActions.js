@@ -9,10 +9,7 @@ export function searchYoutube(searchData) {
       body: JSON.stringify({search_term: searchData})
     })
       .then(resp => resp.json())
-      .then(data => {
-        console.log(data)
-        dispatch({ type: YOUTUBE_SEARCH, payload: {videos: data.items} })
-      })
+      .then(data => dispatch({ type: YOUTUBE_SEARCH, payload: {videos: data.items} }))
   }
 }
 

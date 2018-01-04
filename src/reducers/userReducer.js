@@ -10,10 +10,8 @@ export default (state = INITIAL_STATE, action) => {
     case (GET_ALL_USERS):
       return {...state, allUsers: action.payload.allUsers};
     case (UPDATE_USER_INFO):
-      console.log(action.payload.currentUser)
       return {...state, currentUser: action.payload.currentUser};
     case (GET_USER_FAVORITES):
-      console.log(action.payload.favorites)
       return {...state, favorites: action.payload.favorites};
     default:
       return state;

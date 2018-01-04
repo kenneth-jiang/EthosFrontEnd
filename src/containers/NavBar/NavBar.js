@@ -12,7 +12,7 @@ import { Button, Menu, Dropdown, Icon } from 'semantic-ui-react';
 class NavBar extends React.Component {
   render () {
     return (
-      <Menu color="teal" attached='top' inverted compact>
+      <Menu color="black" attached='top' inverted compact>
         <Menu.Item>
           <Button onClick={this.props.toggleSideBarVisibility}>
             <Icon name="sidebar" />
@@ -26,11 +26,11 @@ class NavBar extends React.Component {
         </Menu.Item>
         :
         <Menu.Item position='right'>
-          <Dropdown text={this.props.user.currentUser.user.username} icon='user' floating labeled button className='icon'>
+          <Dropdown text={this.props.user.currentUser.user.username} icon='sidebar' floating labeled button className='icon'>
             <Dropdown.Menu>
               <Dropdown.Item>
-                <NavLink to={`/user/${this.props.user.currentUser.user.id}`}>
-                  Profile
+                <NavLink style={{color:"black"}} to={`/user/${this.props.user.currentUser.user.id}`}>
+                  <Icon name="user circle" />Profile
                 </NavLink>
               </Dropdown.Item>
               <Dropdown.Item onClick={() => this.props.logoutUser(this.props.props.history)}>

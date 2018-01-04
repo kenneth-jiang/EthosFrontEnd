@@ -10,10 +10,7 @@ export function getAllMessages() {
       .then(resp => resp.json())
       .then(data => {
         if (!data.error) {
-          console.log(data)
           return dispatch({ type: USER_MESSAGES, payload: {results: data} })
-        } else {
-          console.log(data)
         }
       })
   }

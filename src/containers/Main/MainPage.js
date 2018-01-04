@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter, Switch, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Sidebar, Grid, Segment, Menu, Icon, Image } from 'semantic-ui-react';
+import { Sidebar, Segment, Menu, Icon } from 'semantic-ui-react';
 
 import { getCurrentUser } from '../../actions/userActions';
 import requireAuthentication from '../../hoc/requireAuthentication';
@@ -28,6 +28,12 @@ class MainPage extends React.Component {
     }
   }
 
+  renderMainPage = () => {
+    return (
+      <Segment className="fulldisplay" style={{background: "url(https://blogs.mulesoft.com/wp-content/uploads/2012/03/hello-world.jpg)", backgroundSize: "100%"}}>
+      </Segment>
+    )
+  }
 
   render() {
     return (
@@ -100,16 +106,16 @@ class MainPage extends React.Component {
             <Sidebar.Pusher className="fulldisplay">
               <Segment className="fulldisplay">
                 <Switch>
-                  <Route path="/user" component={UserPage} />
                   <Route exact path="/chat" component={Chat} />
                   <Route exact path="/wolfram" component={WolframPage} />
                   <Route exact path="/youtube" component={YoutubePage} />
+                  <Route exact path="/reddit_authorization" component={RedditAuthorization} />
+                  <Route exact path="/spotify_authorization" component={SpotifyAuthorization} />
+                  <Route path="/user" component={UserPage} />
                   <Route path="/news" component={NewsPage} />
                   <Route path="/reddit" component={RedditPage} />
                   <Route path="/spotify" component={SpotifyPage} />
-                  <Route exact path="/reddit_authorization" component={RedditAuthorization} />
-                  <Route exact path="/spotify_authorization" component={SpotifyAuthorization} />
-                  <Route exact path="/" render={() => "hello"} />
+                  <Route exact path="/" render={() => this.renderMainPage()} />
                   <Route component={NotFound} />
                 </Switch>
               </Segment>

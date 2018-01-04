@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Grid, Segment, Card, Image, Icon } from 'semantic-ui-react';
+import { Grid, Segment, Card, Image } from 'semantic-ui-react';
 
 import { spotifySetURI } from '../../actions/spotifyActions';
 

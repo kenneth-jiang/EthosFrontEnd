@@ -6,12 +6,6 @@ import Loading from '../../components/Loading'
 
 
 class RedditPost extends React.Component {
-  // convertDate = (date) => {
-  //   console.log(date);
-  //   var d = new Date(date);
-  //   return d.toLocaleString(); // expected output: "7/25/2016, 1:35:07 PM"
-  // }
-
   getChildren = (child) => {
     if (child.data.replies !== undefined) {
       if (child.data.replies.data !== undefined) {

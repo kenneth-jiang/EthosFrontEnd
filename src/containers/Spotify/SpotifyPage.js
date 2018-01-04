@@ -16,7 +16,7 @@ class SpotifyPage extends React.Component {
   }
 
   render() {
-    const { getSpotifyUserTopTracks, getSpotifyFeaturedPlaylists, getSpotifyUserTopArtists, getSpotifyUserRecentTracks, getSpotifySelfPlaylists } = this.props;
+    const { getSpotifyUserTopTracks, getSpotifyUserTopArtists, getSpotifyUserRecentTracks, getSpotifySelfPlaylists } = this.props;
     let options = [
       <Button fluid onClick={getSpotifyUserTopTracks}><Icon name="music" />Top Tracks</Button>,
       <Button fluid onClick={getSpotifyUserTopArtists}><Icon name="child" />Top Artists</Button>,
@@ -26,11 +26,11 @@ class SpotifyPage extends React.Component {
     return (
       <div className="fulldisplay">
         <Grid columns="equal">
-          <Grid.Column width={6} align="right">
-            <SpotifySearch />
-          </Grid.Column>
-          <Grid.Column width={6} align="center">
+          <Grid.Column width={4} align="center">
             <iframe src={`https://open.spotify.com/embed?uri=${this.props.spotify.uri}`} title="spotifyplayer" width="300" height="380" frameBorder="5px" allowtransparency="true"></iframe>
+          </Grid.Column>
+          <Grid.Column width={8} align="center">
+            <SpotifySearch />
           </Grid.Column>
           <Grid.Column width={2}>
           </Grid.Column>

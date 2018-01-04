@@ -32,10 +32,7 @@ export function getSpotifySelfPlaylists() {
       headers: headers,
     })
       .then(resp => resp.json())
-      .then(data => {
-        console.log(data)
-        dispatch({ type: SPOTIFY_USER_PLAYLISTS, payload: {results: data} })
-      })
+      .then(data => dispatch({ type: SPOTIFY_USER_PLAYLISTS, payload: {results: data} }))
   }
 }
 
@@ -76,7 +73,6 @@ export function getSpotifyUserRecentTracks() {
   }
 }
 export function searchSpotifyTrack(trackData) {
-  console.log('here')
   return (dispatch) => {
     return fetch(`${backendAPI}/spotify_search_track`, {
       method: 'POST',

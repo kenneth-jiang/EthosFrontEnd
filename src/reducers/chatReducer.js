@@ -6,7 +6,6 @@ const INITIAL_STATE = { messages: [] };
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case (USER_MESSAGES):
-      console.log(action.payload.results)
       return {...state, messages: action.payload.results};
     default:
       return state;

@@ -8,7 +8,6 @@ export default (state = INITIAL_STATE, action) => {
     case (YOUTUBE_SEARCH):
       return {...state, videos: action.payload.videos};
     case (VIEW_CURRENT_VIDEO):
-      console.log(action.payload.currentVideo);
       return {...state, currentVideo: action.payload.currentVideo}
     default:
       return state;

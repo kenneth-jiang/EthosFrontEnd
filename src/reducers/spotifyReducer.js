@@ -8,14 +8,12 @@ export default(state = INITIAL_STATE, action) => {
     case (GET_SPOTIFY_SELF):
       return {...state, currentUser: action.payload.results, isLoggedIn: true};
     case (SPOTIFY_USER_PLAYLISTS):
-      console.log(action.payload.results);
       return {...state, playlists: action.payload.results.playlists};
     case (SPOTIFY_USER_TOP_TRACKS):
       return {...state, tracks: action.payload.results};
     case (SPOTIFY_USER_TOP_ARTISTS):
       return {...state, artists: action.payload.results};
     case (SPOTIFY_USER_RECENT_TRACKS):
-    console.log(action.payload.results)
       return {...state, tracks: action.payload.results};
     case (SPOTIFY_SEARCH_TRACK):
       return {...state, tracks: action.payload.results.tracks};
@@ -24,10 +22,8 @@ export default(state = INITIAL_STATE, action) => {
     case (SPOTIFY_ARTIST_TRACKS):
       return {...state, tracks: {items: action.payload.results.tracks}};
     case (SEARCH_SPOTIFY_PLAYLISTS):
-      console.log(action.payload.results);
       return {...state, playlists: action.payload.results.playlists};
     case (SPOTIFY_FEATURED_PLAYLISTS):
-      console.log(action.payload.results);
       return {...state, playlists: action.payload.results.playlists};
     case (SPOTIFY_SET_URI):
       return {...state, uri: action.payload.uri};
