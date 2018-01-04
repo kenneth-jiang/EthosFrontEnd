@@ -10,13 +10,13 @@ import Chat from '../Chat/Chat';
 import WolframPage from '../Wolfram/WolframPage';
 import NewsPage from '../News/NewsPage';
 import YoutubePage from '../Youtube/YoutubePage';
-
 import UserPage from '../User/UserPage';
 import RedditPage from '../Reddit/RedditPage';
 import RedditAuthorization from '../Reddit/RedditAuthorization';
 import SpotifyPage from '../Spotify/SpotifyPage';
 import SpotifyAuthorization from '../Spotify/SpotifyAuthorization';
 import NotFound from '../../components/NotFound';
+import Tones from '../Tones/Tones';
 
 
 class MainPage extends React.Component {
@@ -116,6 +116,7 @@ class MainPage extends React.Component {
                   <Route path="/reddit" component={RedditPage} />
                   <Route path="/spotify" component={SpotifyPage} />
                   <Route exact path="/" render={() => this.renderMainPage()} />
+                  <Route exact path="/tones" component={Tones} />
                   <Route component={NotFound} />
                 </Switch>
               </Segment>

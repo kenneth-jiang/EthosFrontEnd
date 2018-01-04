@@ -55,3 +55,6 @@ export const SPOTIFY_FEATURED_PLAYLISTS = "SPOTIFY_FEATURED_PLAYLISTS";
 
 // Chat Actions -------------------------------------------------------------- |
 export const USER_MESSAGES = "USER_MESSAGES";
+
+// Tones Actions ------------------------------------------------------------- |
+export const GET_USER_TONES = "GET_USER_TONES";
