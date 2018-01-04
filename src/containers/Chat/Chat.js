@@ -72,23 +72,22 @@ class Chat extends React.Component {
             </Form.Group>
           </Form>
           <div style={{height:"70vh", maxHeight:"70vh", overflow: "auto"}}>
-            {this.state.chats.map(message => {
+            {this.state.chats.map((message, index) => {
               return (
                 (this.props.user.currentUser.user.username === message.username)
                 ?
-
-                (<Segment align="right"><strong>{`${message.username} `}</strong>{`[${message.time}]: `}<br /><div style={{color:"blue"}}>{message.content}</div></Segment>)
+                (<Segment key={index} align="right"><strong>{`${message.username} `}</strong>{`[${message.time}]: `}<br /><div style={{color:"blue"}}>{message.content}</div></Segment>)
                 :
-                (<Segment align="left"><strong>{`${message.username} `}</strong>{`[${message.time}]: `}<br />{message.content}</Segment>)
+                (<Segment key={index} align="left"><strong>{`${message.username} `}</strong>{`[${message.time}]: `}<br />{message.content}</Segment>)
               )
            }).reverse()}
-           {this.props.chat.messages.map((message) => {
+           {this.props.chat.messages.map((message, index) => {
               return (
                 (this.props.user.currentUser.user.username === message.username)
                 ?
-                (<Segment align="right"><strong>{`${message.username} `}</strong>{`[${message.time}]: `}<br /><div style={{color:"blue"}}>{message.content}</div></Segment>)
+                (<Segment key={index} align="right"><strong>{`${message.username} `}</strong>{`[${message.time}]: `}<br /><div style={{color:"blue"}}>{message.content}</div></Segment>)
                 :
-                (<Segment align="left"><strong>{`${message.username} `}</strong>{`[${message.time}]: `}<br />{message.content}</Segment>)
+                (<Segment key={index} align="left"><strong>{`${message.username} `}</strong>{`[${message.time}]: `}<br />{message.content}</Segment>)
               )
             }).reverse()}
           </div>

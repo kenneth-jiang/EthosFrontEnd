@@ -1,53 +1,23 @@
 import React from 'react';
-
 import { connect } from 'react-redux';
+import { Grid, Segment, Embed } from 'semantic-ui-react';
 
 import YoutubeSearch from './YoutubeSearch';
 import YoutubeResults from './YoutubeResults';
 import YoutubeDetail from './YoutubeDetail';
 
-import { Grid, Embed } from 'semantic-ui-react';
-
 
 class YoutubePage extends React.Component {
-  renderPlayer = () => {
-    const { youtube } = this.props;
-    return (
-      <Embed
-        id={ (youtube.currentVideo.id !== undefined) ? (youtube.currentVideo.id.videoId) : (null) }
-        width="900"
-        height="550"
-        source='youtube'
-      />
-    )
-  }
-
-  renderDetail = () => {
-    if (this.props.youtube.currentVideo.snippet === undefined) {
-      return null;
-    } else {
-      return <YoutubeDetail />
-    }
-  }
-
-  renderResults = () => {
-    if (this.props.youtube.videos.length === 0) {
-      return null;
-    } else {
-      return <YoutubeResults />
-    }
-  }
-
   render() {
     return (
-      <Grid className="fulldisplay">
-        <Grid.Column align="center" width={10}>
-          <YoutubeSearch /><br />
-          {this.renderPlayer()}<br /><br />
-          {this.renderDetail()}
+      <Grid>
+        <Grid.Column width={10}>
+          <YoutubeSearch /> <br />
+          <Segment><Embed id={(this.props.youtube.currentVideo.id !== undefined) ? (this.props.youtube.currentVideo.id.videoId) : (null)} width="900" height="550" source='youtube' /></Segment>
+          {this.props.youtube.currentVideo.snippet !== undefined ? <YoutubeDetail /> :null}
         </Grid.Column>
         <Grid.Column align="right" width={6}>
-          {this.renderResults()}
+          {this.props.youtube.videos ? <YoutubeResults /> : null}
         </Grid.Column>
       </Grid>
     )

@@ -15,11 +15,11 @@ class RedditPopular extends React.Component {
     if (this.props.reddit.popular.data === undefined) {
       return <Loading />
     }
-    console.log(this.props)
+
     return (
       <Grid>
         <Grid.Column>
-          <h3>Reddit Popular</h3>
+          <h3 align="center">r/popular</h3>
           <Item.Group divided>
             {this.props.reddit.popular.data.children.map((post, index) => {
               return (

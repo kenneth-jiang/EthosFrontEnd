@@ -7,13 +7,11 @@ import { getCurrentUser } from '../../actions/userActions';
 import requireAuthentication from '../../hoc/requireAuthentication';
 import NavBar from '../NavBar/NavBar';
 import Chat from '../Chat/Chat';
+import WolframPage from '../Wolfram/WolframPage';
+import NewsPage from '../News/NewsPage';
+import YoutubePage from '../Youtube/YoutubePage';
 
 import UserPage from '../User/UserPage';
-import WolframPage from '../Wolfram/WolframPage';
-// import WolframSearch from '../Wolfram/WolframSearch';
-// import WolframResults from '../Wolfram/WolframResults';
-import YoutubePage from '../Youtube/YoutubePage';
-import NewsPage from '../News/NewsPage';
 import RedditPage from '../Reddit/RedditPage';
 import RedditAuthorization from '../Reddit/RedditAuthorization';
 import SpotifyPage from '../Spotify/SpotifyPage';
@@ -105,8 +103,8 @@ class MainPage extends React.Component {
                   <Route path="/user" component={UserPage} />
                   <Route exact path="/chat" component={Chat} />
                   <Route exact path="/wolfram" component={WolframPage} />
+                  <Route exact path="/youtube" component={YoutubePage} />
                   <Route path="/news" component={NewsPage} />
-                  <Route path="/youtube" component={YoutubePage} />
                   <Route path="/reddit" component={RedditPage} />
                   <Route path="/spotify" component={SpotifyPage} />
                   <Route exact path="/reddit_authorization" component={RedditAuthorization} />

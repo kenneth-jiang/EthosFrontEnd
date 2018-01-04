@@ -18,11 +18,11 @@ class RedditAww extends React.Component {
     return (
       <Grid>
         <Grid.Column>
-          <h3>Reddit Aww</h3>
+          <h3 align="center">r/aww</h3>
           <Item.Group divided>
             {this.props.reddit.aww.data.children.map((post, index) => {
               return (
-                <RedditItem key={index} post={post}/>
+                <RedditItem key={index} post={post} />
               )
             })}
           </Item.Group>

@@ -1,18 +1,16 @@
 import React from 'react';
-
 import { connect } from 'react-redux';
+import { Grid, Segment, List, Item, Icon } from 'semantic-ui-react';
 
-import { Grid, List, Item, Icon } from 'semantic-ui-react';
+import Loading from '../../components/Loading'
 
 
 class RedditPost extends React.Component {
-  convertDate = (date) => {
-    var utcSeconds = date;
-    var d = new Date(0);
-    var seconds = d.setUTCSeconds(utcSeconds);
-    var a = Date(seconds);
-    return a;
-  }
+  // convertDate = (date) => {
+  //   console.log(date);
+  //   var d = new Date(date);
+  //   return d.toLocaleString(); // expected output: "7/25/2016, 1:35:07 PM"
+  // }
 
   getChildren = (child) => {
     if (child.data.replies !== undefined) {
@@ -24,13 +22,15 @@ class RedditPost extends React.Component {
                 return (
                   <div key={index}>
                     {child.data.body ?
-                      <List.Item as="li">
-                        <List.Content>
-                          <List.Header><strong>{child.data.author}</strong> {child.data.score >= 0 ? <Icon name='arrow up' /> : <Icon name='arrow down' />} {`${child.data.score} points`} {this.convertDate(child.data.created_utc)}</List.Header>
-                          <List.Description>{child.data.body}</List.Description>
-                            {this.getChildren(child)}
-                        </List.Content>
-                      </List.Item>
+                      <Segment>
+                        <List.Item>
+                          <List.Content>
+                            <List.Header><strong>{child.data.author}</strong> {child.data.score >= 0 ? <Icon name='arrow up' /> : <Icon name='arrow down' />} {`${child.data.score} points`} </List.Header>
+                            <List.Description>{child.data.body}</List.Description>
+                              <br /> {this.getChildren(child)}
+                          </List.Content>
+                        </List.Item>
+                      </Segment>
                     :
                       null
                     }
@@ -47,47 +47,45 @@ class RedditPost extends React.Component {
 
   render() {
     if (this.props.reddit.currentPost.length === 0) {
-      return "Loading..."
+      return <Loading />
     }
-
     const { reddit } = this.props;
-    console.log(reddit)
-    console.log(reddit.currentPost[0].data.children[0].url);
-
     return (
       <Grid>
         <Grid.Column width={1} />
         <Grid.Column width={14}>
-          <Item style={{border: "solid"}}>
-            <Grid columns="equal">
-              <Grid.Column width={2}>
-                <Item align="center">
-                  <br />
-                  <Icon name='arrow up' /> <br /><br />
-                  Votes: <br />
-                  {reddit.currentPost[0].data.children[0].data.score} <br /><br />
-                  <Icon name='arrow down' />
-                </Item>
-              </Grid.Column>
+          <Segment>
+            <Item>
+              <Grid columns="equal">
+                <Grid.Column width={2}>
+                  <Item align="center">
+                    <br />
+                    <Icon name='arrow up' /> <br /><br />
+                    Votes: <br />
+                    {reddit.currentPost[0].data.children[0].data.score} <br /><br />
+                    <Icon name='arrow down' />
+                  </Item>
+                </Grid.Column>
 
-              <Grid.Column align="center" width={4}>
-                <Item.Image size="large" href={reddit.currentPost[0].data.children[0].data.url} src={reddit.currentPost[0].data.children[0].data.thumbnail} />
-              </Grid.Column>
+                <Grid.Column align="center" width={4}>
+                  <Item.Image size="large" href={reddit.currentPost[0].data.children[0].data.url} src={reddit.currentPost[0].data.children[0].data.thumbnail} />
+                </Grid.Column>
 
-              <Grid.Column>
-                <Item.Content>
-                  <Item.Header><h3>{reddit.currentPost[0].data.children[0].data.title}</h3></Item.Header>
-                  <Item.Meta>{reddit.currentPost[0].data.children[0].data.selftext}</Item.Meta>
-                  <Item.Description>
-                    Author: {reddit.currentPost[0].data.children[0].data.author}<br />
-                    Subreddit: {reddit.currentPost[0].data.children[0].data.subreddit_name_prefixed}<br />
-                    Date Created: {this.convertDate(reddit.currentPost[0].data.children[0].data.created_utc)}<br />
-                    Comments: {reddit.currentPost[0].data.children[0].data.num_comments}<br />
-                  </Item.Description>
-                </Item.Content>
-              </Grid.Column>
-            </Grid>
-          </Item>
+                <Grid.Column>
+                  <Item.Content>
+                    <Item.Header><h3>{reddit.currentPost[0].data.children[0].data.title}</h3></Item.Header>
+                    <Item.Meta>{reddit.currentPost[0].data.children[0].data.selftext}</Item.Meta>
+                    <Item.Description>
+                      Author: {reddit.currentPost[0].data.children[0].data.author} <br />
+                      Subreddit: {reddit.currentPost[0].data.children[0].data.subreddit_name_prefixed} <br /><br />
+                      Comments: {reddit.currentPost[0].data.children[0].data.num_comments} <br />
+                      <Icon name='heart' circular className="bottom-right" color="red" onClick={() => this.props.favoriteReddit(reddit.currentPost)}/>
+                    </Item.Description>
+                  </Item.Content>
+                </Grid.Column>
+              </Grid>
+            </Item>
+            </Segment>
         </Grid.Column>
         <Grid.Column width={1} />
         <Grid.Column width={1} />
@@ -97,14 +95,15 @@ class RedditPost extends React.Component {
             return (
               <div key={index}>
                 {child.data.body ?
-                  <List.Item as="li" style={{border:"solid"}}>
-                    <List.Content>
-                      <List.Header><strong>{child.data.author}</strong> {child.data.score >= 0 ? <Icon name='arrow up' /> : <Icon name='arrow down' />} {`${child.data.score} points`} {this.convertDate(child.data.created_utc)}</List.Header>
-                      <List.Description>{child.data.body}</List.Description>
-                        {this.getChildren(child)}
-                        <br />
-                    </List.Content>
-                  </List.Item>
+                  <Segment>
+                    <List.Item>
+                      <List.Content>
+                        <List.Header><strong>{child.data.author}</strong> {child.data.score >= 0 ? <Icon name='arrow up' /> : <Icon name='arrow down' />} {`${child.data.score} points`} </List.Header>
+                        <List.Description>{child.data.body}</List.Description>
+                          <br /> {this.getChildren(child)}
+                      </List.Content>
+                    </List.Item>
+                  </Segment>
                 :
                   null
                 }

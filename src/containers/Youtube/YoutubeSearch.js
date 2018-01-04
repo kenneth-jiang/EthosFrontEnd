@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { searchYoutube } from '../../actions/youtubeActions';
-import { Form, Input, Button } from 'semantic-ui-react';
+import { Form, Input, Image, Button, Icon } from 'semantic-ui-react';
 
 
 class YoutubeSearch extends React.Component {
@@ -23,11 +23,13 @@ class YoutubeSearch extends React.Component {
 
   render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
-        <h3>Search Youtube Videos!</h3>
-        <Input icon='search' onChange={this.handleChange} value={this.state.searchTerm} />
-        <Button type="submit">Search</Button>
-      </Form>
+      <div align="center">
+        <Image size="small" src="http://www.longwan.co/wp-content/uploads/2017/10/youtube-logo-designer-youtube-logo-png-transparent-background-download-diy-logo-designs.png" />
+        <Form onSubmit={this.handleSubmit}>
+          <Input onChange={this.handleChange} value={this.state.searchTerm} />
+          <Button type="submit"><Icon name="search" /></Button>
+        </Form>
+      </div>
     )
   }
 }

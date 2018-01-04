@@ -42,6 +42,7 @@ export const GET_REDDIT_POST = "GET_REDDIT_POST";
 
 // Spotify Actions ----------------------------------------------------------- |
 export const GET_SPOTIFY_SELF = "GET_SPOTIFY_SELF";
+export const SPOTIFY_USER_PLAYLISTS = "SPOTIFY_USER_PLAYLISTS";
 export const SPOTIFY_USER_TOP_TRACKS = "SPOTIFY_USER_TOP_TRACKS";
 export const SPOTIFY_USER_TOP_ARTISTS = "SPOTIFY_USER_TOP_ARTISTS";
 export const SPOTIFY_USER_RECENT_TRACKS = "SPOTIFY_USER_RECENT_TRACKS";
@@ -49,6 +50,8 @@ export const SPOTIFY_SEARCH_TRACK = "SPOTIFY_SEARCH_TRACK";
 export const SPOTIFY_SEARCH_ARTIST = "SPOTIFY_SEARCH_ARTIST";
 export const SPOTIFY_SET_URI = "SPOTIFY_SET_URI";
 export const SPOTIFY_ARTIST_TRACKS = "SPOTIFY_ARTIST_TRACKS";
+export const SEARCH_SPOTIFY_PLAYLISTS = "SEARCH_SPOTIFY_PLAYLISTS";
+export const SPOTIFY_FEATURED_PLAYLISTS = "SPOTIFY_FEATURED_PLAYLISTS";
 
 // Chat Actions -------------------------------------------------------------- |
 export const USER_MESSAGES = "USER_MESSAGES";

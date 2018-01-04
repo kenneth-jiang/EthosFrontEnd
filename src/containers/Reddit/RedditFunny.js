@@ -19,7 +19,7 @@ class RedditFunny extends React.Component {
     return (
       <Grid>
         <Grid.Column>
-          <h3>Reddit Funny</h3>
+          <h3 align="center">r/funny</h3>
           <Item.Group divided>
             {this.props.reddit.funny.data.children.map((post, index) => {
               return (

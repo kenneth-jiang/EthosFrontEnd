@@ -1,5 +1,5 @@
 import { backendAPI, headers } from '../services/Adapter';
-import { GET_SPOTIFY_SELF, SPOTIFY_USER_TOP_TRACKS, SPOTIFY_USER_TOP_ARTISTS, SPOTIFY_USER_RECENT_TRACKS, SPOTIFY_SEARCH_TRACK, SPOTIFY_SEARCH_ARTIST, SPOTIFY_ARTIST_TRACKS, SPOTIFY_SET_URI } from './actionTypes';
+import { GET_SPOTIFY_SELF, SPOTIFY_FEATURED_PLAYLISTS, SPOTIFY_USER_PLAYLISTS, SPOTIFY_USER_TOP_TRACKS, SPOTIFY_USER_TOP_ARTISTS, SPOTIFY_USER_RECENT_TRACKS, SPOTIFY_SEARCH_TRACK, SPOTIFY_SEARCH_ARTIST, SPOTIFY_ARTIST_TRACKS, SEARCH_SPOTIFY_PLAYLISTS,  SPOTIFY_SET_URI } from './actionTypes';
 
 
 export function spotifyAccessToken(history, location) {
@@ -21,9 +21,20 @@ export function getSpotifySelf() {
       headers: headers,
     })
       .then(resp => resp.json())
+      .then(data => dispatch({ type: GET_SPOTIFY_SELF, payload: {results: data} }))
+  }
+}
+
+export function getSpotifySelfPlaylists() {
+  return (dispatch) => {
+    return fetch(`${backendAPI}/spotify_user_playlists`, {
+      method: 'POST',
+      headers: headers,
+    })
+      .then(resp => resp.json())
       .then(data => {
         console.log(data)
-        dispatch({ type: GET_SPOTIFY_SELF, payload: {results: data} })
+        dispatch({ type: SPOTIFY_USER_PLAYLISTS, payload: {results: data} })
       })
   }
 }
@@ -102,6 +113,32 @@ export function getArtistTracks(artistId, artistName) {
       .then(resp => resp.json())
       .then(data => {
         dispatch({ type: SPOTIFY_ARTIST_TRACKS, payload: {results: data} })
+      })
+  }
+}
+
+export function searchSpotifyPlaylists(searchTerm) {
+  return (dispatch) => {
+    return fetch(`${backendAPI}/spotify_search_playlists`, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify({ search_term: searchTerm })
+    })
+      .then(resp => resp.json())
+      .then(data => {
+        dispatch({ type: SEARCH_SPOTIFY_PLAYLISTS, payload: {results: data} })
+      })
+  }
+}
+export function getSpotifyFeaturedPlaylists() {
+  return (dispatch) => {
+    return fetch(`${backendAPI}/spotify_featured_playlists`, {
+      method: 'POST',
+      headers: headers,
+    })
+      .then(resp => resp.json())
+      .then(data => {
+        dispatch({ type: SPOTIFY_FEATURED_PLAYLISTS, payload: {results: data} })
       })
   }
 }

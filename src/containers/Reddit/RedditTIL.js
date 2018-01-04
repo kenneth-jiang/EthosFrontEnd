@@ -18,8 +18,8 @@ class RedditTIL extends React.Component {
     return (
       <Grid>
         <Grid.Column>
-          <h3>Reddit TIL</h3>
           <Item.Group divided>
+          <h3 align="center">r/TIL</h3>
             {this.props.reddit.til.data.children.map((post, index) => {
               return (
                 <RedditItem key={index} post={post}/>
@@ -27,7 +27,7 @@ class RedditTIL extends React.Component {
             })}
           </Item.Group>
         </Grid.Column>
-    </Grid>
+      </Grid>
     )
   }
 }

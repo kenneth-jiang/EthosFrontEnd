@@ -34,7 +34,7 @@ class NavBar extends React.Component {
                 </NavLink>
               </Dropdown.Item>
               <Dropdown.Item onClick={() => this.props.logoutUser(this.props.props.history)}>
-                <Icon name="shutdown" />
+                <Icon name="log out" />
                 Log Out
               </Dropdown.Item>
             </Dropdown.Menu>

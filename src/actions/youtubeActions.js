@@ -21,3 +21,13 @@ export function viewCurrentVideo(videoData) {
     return dispatch({ type: VIEW_CURRENT_VIDEO, payload: {currentVideo: videoData} });
   }
 }
+
+export function favoriteYoutube(favoriteData) {
+  return (dispatch) => {
+    return fetch(`${backendAPI}/youtube_favorite`, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify(favoriteData)
+    })
+  }
+}

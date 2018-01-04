@@ -21,10 +21,7 @@ export function getRedditFunny() {
       headers: headers,
     })
       .then(resp => resp.json())
-      .then(data => {
-        console.log(data)
-        dispatch({ type: GET_REDDIT_FUNNY, payload: {results: data} })
-      })
+      .then(data => dispatch({ type: GET_REDDIT_FUNNY, payload: {results: data} }))
   }
 }
 
@@ -109,7 +106,6 @@ export function getRedditSelf() {
 }
 
 export function getRedditPost(permalink, history) {
-  console.log(history)
   return (dispatch) => {
     return fetch(`${backendAPI}/reddit_post`, {
       method: 'POST',
@@ -118,7 +114,6 @@ export function getRedditPost(permalink, history) {
     })
       .then(resp => resp.json())
       .then(data => {
-        console.log(data)
         dispatch({ type: GET_REDDIT_POST, payload: {results: data} })
         return history.push('/reddit/post')
       })

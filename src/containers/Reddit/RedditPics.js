@@ -15,11 +15,11 @@ class RedditPics extends React.Component {
     if (this.props.reddit.pics.data === undefined) {
       return <Loading />
     }
-    console.log(this.props)
+
     return (
       <Grid>
         <Grid.Column>
-          <h3>Reddit Pics</h3>
+          <h3 align="center">r/pics</h3>
           <Item.Group divided>
             {this.props.reddit.pics.data.children.map((post, index) => {
               return (

@@ -15,26 +15,36 @@ class WolframResults extends React.Component {
           <div style={{float:"right"}}>
             <Icon circular name="heart" color="red" align="right" onClick={() => this.props.favoriteWolfram(queryresult)} />
           </div> <br /><br />
-          {queryresult.pods.map((pod, index) => {
-            return (
-              <Segment key={index}>
-                {pod.title} <br /><br />
-                <Image src={pod.subpods[0].img.src} />
-              </Segment>
-            )
-          })}
+          {queryresult.pods !== undefined ?
+            queryresult.pods.map((pod, index) => {
+              return (
+                <Segment key={index} onClick={() => this.props.addClickTerm(pod.title)}>
+                  {pod.title} <br /><br />
+                  <Image src={pod.subpods[0].img.src} />
+                </Segment>
+              )
+            })
+          :
+            null
+          }
         </Grid.Column>
         <Grid.Column width={4}>
-          {queryresult.sources ? <h2 align="center">Sources</h2> : null}
-          {queryresult.sources.map((source, index) => {
-            return (
-              <li key={index}>
-                <a href={source.url} onClick={() => this.props.addClickTerm(source.text)}>
-                  {source.text}
-                </a>
-              </li>
-            )
-          })}
+          {queryresult.sources !== undefined ?
+            <div>
+              <h2 align="center">Sources</h2>
+              {queryresult.sources.map((source, index) => {
+                return (
+                  <li key={index}>
+                    <a href={source.url} onClick={() => this.props.addClickTerm(source.text)}>
+                      {source.text}
+                    </a>
+                  </li>
+                )
+              })}
+            </div>
+          :
+            null
+          }
         </Grid.Column>
       </Grid>
     )
