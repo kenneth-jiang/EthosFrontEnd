@@ -10,14 +10,14 @@ class UserNeeds extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedBarchart: true,
-      selectedPolar: false,
-      selectedRadar: false,
-      selectedNormalBarchart: false,
+      selectedBarChart: true,
+      selectedHorizontalChart: false,
+      selectedPolarChart: false,
+      selectedRadarChart: false,
     }
   }
 
-  renderNormalBarChart = () => {
+  renderBarChart = () => {
     const { personality } = this.props.personality.personalities;
     const personalityNames = personality.map((personality) => personality.name);
     const personalityScores = personality.map((personality) => (personality.raw_score * 100).toFixed(1));
@@ -102,7 +102,7 @@ class UserNeeds extends React.Component {
     return <Bar data={data} options={options} />
   };
 
-  renderBarChart = () => {
+  renderHorizontalChart = () => {
     const { needs } = this.props.personality.personalities;
     const needNames = needs.map((need) => need.name);
     const needScores = needs.map((need) => (need.raw_score * 100).toFixed(1));
@@ -221,26 +221,26 @@ class UserNeeds extends React.Component {
   render() {
     if (!this.props.personality.personalities.needs) { return <Loading /> }
 
-    const { selectedNormalBarchart, selectedBarchart, selectedPolar, selectedRadar } = this.state;
+    const { selectedBarChart, selectedHorizontalChart, selectedPolarChart, selectedRadarChart } = this.state;
 
     return (
       <Grid>
         <Grid.Column width={3}>
         </Grid.Column>
         <Grid.Column width={10}>
-          {selectedBarchart ? this.renderBarChart() : null}
-          {selectedPolar ? this.renderPolarChart() : null}
-          {selectedRadar ? this.renderRadarChart() : null}
-          {selectedNormalBarchart ? this.renderNormalBarChart() : null}
+          {selectedBarChart ? this.renderBarChart() : null}
+          {selectedHorizontalChart ? this.renderHorizontalChart() : null}
+          {selectedPolarChart ? this.renderPolarChart() : null}
+          {selectedRadarChart ? this.renderRadarChart() : null}
           <br /><br />
           <Button.Group>
-          <Button color="red" onClick={() => this.setState({ selectedNormalBarchart: false, selectedPolar: false, selectedBarchart: true, selectedRadar: false })}>Horizontal Bar Chart</Button>
+          <Button color="yellow" onClick={() => this.setState({ selectedBarChart: true, selectedPolarChart: false, selectedHorizontalChart: false, selectedRadarChart: false })}>Bar Chart</Button>
           <Button.Or />
-          <Button color="blue" onClick={() => this.setState({ selectedNormalBarchart: false, selectedPolar: true, selectedBarchart: false, selectedRadar: false })}>Polar Chart</Button>
+          <Button color="red" onClick={() => this.setState({ selectedBarChart: false, selectedPolarChart: false, selectedHorizontalChart: true, selectedRadarChart: false })}>Horizontal Chart</Button>
           <Button.Or />
-          <Button color="teal" onClick={() => this.setState({ selectedNormalBarchart: false, selectedPolar: false, selectedBarchart: false, selectedRadar: true })}>Radar Chart</Button>
+          <Button color="blue" onClick={() => this.setState({ selectedBarChart: false, selectedPolarChart: true, selectedHorizontalChart: false, selectedRadarChart: false })}>Polar Chart</Button>
           <Button.Or />
-          <Button color="yellow" onClick={() => this.setState({ selectedNormalBarchart: true, selectedPolar: false, selectedBarchart: false, selectedRadar: false })}>Bar Chart</Button>
+          <Button color="teal" onClick={() => this.setState({ selectedBarChart: false, selectedPolarChart: false, selectedHorizontalChart: false, selectedRadarChart: true })}>Radar Chart</Button>
           </Button.Group>
         </Grid.Column>
         <Grid.Column width={3}>

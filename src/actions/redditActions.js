@@ -6,7 +6,7 @@ export function redditAccessToken(history, location) {
   return (dispatch) => {
     return fetch(`${backendAPI}/reddit_token`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
       body: JSON.stringify({code: location.search.split("&code=")[1]})
     })
       .then(resp => resp.json())
@@ -18,7 +18,7 @@ export function getRedditFunny() {
   return (dispatch) => {
     return fetch(`${backendAPI}/reddit_funny`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
     })
       .then(resp => resp.json())
       .then(data => dispatch({ type: GET_REDDIT_FUNNY, payload: {results: data} }))
@@ -29,7 +29,7 @@ export function getRedditAww() {
   return (dispatch) => {
     return fetch(`${backendAPI}/reddit_aww`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
     })
       .then(resp => resp.json())
       .then(data => {
@@ -42,7 +42,7 @@ export function getRedditTIL() {
   return (dispatch) => {
     return fetch(`${backendAPI}/reddit_til`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
     })
       .then(resp => resp.json())
       .then(data => {
@@ -55,7 +55,7 @@ export function getRedditPics() {
   return (dispatch) => {
     return fetch(`${backendAPI}/reddit_pics`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
     })
       .then(resp => resp.json())
       .then(data => {
@@ -68,7 +68,7 @@ export function getRedditPopular() {
   return (dispatch) => {
     return fetch(`${backendAPI}/reddit_popular`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
     })
       .then(resp => resp.json())
       .then(data => {
@@ -81,7 +81,7 @@ export function searchCustomReddit(subreddit, history) {
   return (dispatch) => {
     return fetch(`${backendAPI}/reddit_custom`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
       body: JSON.stringify({ search_term: subreddit })
     })
       .then(resp => resp.json())
@@ -96,7 +96,7 @@ export function getRedditSelf() {
   return (dispatch) => {
     return fetch(`${backendAPI}/reddit_self`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
     })
       .then(resp => resp.json())
       .then(data => {
@@ -109,7 +109,7 @@ export function getRedditPost(permalink, history) {
   return (dispatch) => {
     return fetch(`${backendAPI}/reddit_post`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
       body: JSON.stringify({ permalink: permalink })
     })
       .then(resp => resp.json())
@@ -124,7 +124,7 @@ export function favoriteReddit(favoriteData) {
   return (dispatch) => {
     return fetch(`${backendAPI}/reddit_favorite`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
       body: JSON.stringify(favoriteData)
     })
   }

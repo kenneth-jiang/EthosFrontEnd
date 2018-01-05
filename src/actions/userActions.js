@@ -2,9 +2,11 @@ import { backendAPI, headers } from '../services/Adapter';
 import { GET_CURRENT_USER, GET_ALL_USERS, UPDATE_USER_INFO, GET_USER_FAVORITES } from './actionTypes';
 
 export function getCurrentUser() {
+  console.log('current_user, headers, authorization', headers().Authorization);
+  console.log('localstorage', localStorage.getItem('token'));
   return (dispatch) => {
     return fetch(`${backendAPI}/current_user`, {
-      headers: Object.assign({}, headers, {token: localStorage.getItem('token')}) // this is correct, don't change it
+      headers: headers(),// this is correct, don't change it
     })
       .then(resp => resp.json())
       .then(data => dispatch({ type: GET_CURRENT_USER, payload: {currentUser: data} }))
@@ -14,7 +16,7 @@ export function getCurrentUser() {
 export function getAllUsers() {
   return (dispatch) => {
     return fetch(`${backendAPI}/all_users`, {
-      headers: headers,
+      headers: headers(),
     })
       .then(resp => resp.json())
       .then(data => dispatch({ type: GET_ALL_USERS, payload: {allUsers: data} }))
@@ -25,7 +27,7 @@ export function signupUserInfo(userInfo, history) {
   return (dispatch) => {
     return fetch(`${backendAPI}/update_user`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
       body: JSON.stringify({user: userInfo})
     })
       .then(resp => resp.json())
@@ -40,7 +42,7 @@ export function updateUserInfo(userInfo) {
   return (dispatch) => {
     return fetch(`${backendAPI}/update_user`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
       body: JSON.stringify({user: userInfo})
     })
       .then(resp => resp.json())
@@ -53,7 +55,7 @@ export function updateUserInfo(userInfo) {
 export function getUserFavorites() {
   return (dispatch) => {
     return fetch(`${backendAPI}/user_favorites`, {
-      headers: headers
+      headers: headers()
     })
       .then(resp => resp.json())
       .then(data => dispatch({ type: GET_USER_FAVORITES, payload: {favorites: data.favorites }}))

@@ -4,7 +4,7 @@ export function addClickTerm(clickData) {
   return (dispatch) => {
     return fetch(`${backendAPI}/click`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
       body: JSON.stringify({click_term: clickData})
     })
   }

@@ -134,24 +134,3 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, { createUserPersonality, showUserPersonality, updateUserInfo })(UserShow);
-
-// import Sunburst from 'react-sunburst-d3-v4';
-// <Sunburst
-//   onMouseEnter={this.handleClick}
-//   data={data}
-//   scale="linear"
-//   tooltipContent={ <div class="sunburstTooltip" style="position:absolute; color:'black'; z-index:10; background: #e2e2e2; padding: 5px; text-align: center;" /> }
-//   tooltip
-//   tooltipPosition="center"
-//   keyId="anagraph"
-//   width="480"
-//   height="400"
-// />
-
-// <Route exact path="/user/:id/favorites" component={UserFavorites} />
-// <Route exact path="/user/:id/personality" component={UserPersonality} />
-// <Route exact path="/user/:id/needs" component={UserNeeds} />
-// <Route exact path="/user/:id/values" component={UserValues} />
-// <Route exact path="/user/:id/preferences" component={UserPreferences} />
-// <Route exact path="/user/:id/friends" component={UserFriends} />
-// <Route exact path="/user/:id/edit" component={UserEdit} />

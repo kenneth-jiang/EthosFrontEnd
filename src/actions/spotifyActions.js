@@ -6,7 +6,7 @@ export function spotifyAccessToken(history, location) {
   return (dispatch) => {
     return fetch(`${backendAPI}/spotify_token`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
       body: JSON.stringify({ code: location.search.split("?code=")[1] })
     })
       .then(resp => resp.json())
@@ -18,7 +18,7 @@ export function getSpotifySelf() {
   return (dispatch) => {
     return fetch(`${backendAPI}/spotify_self`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
     })
       .then(resp => resp.json())
       .then(data => dispatch({ type: GET_SPOTIFY_SELF, payload: {results: data} }))
@@ -29,7 +29,7 @@ export function getSpotifySelfPlaylists() {
   return (dispatch) => {
     return fetch(`${backendAPI}/spotify_user_playlists`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
     })
       .then(resp => resp.json())
       .then(data => dispatch({ type: SPOTIFY_USER_PLAYLISTS, payload: {results: data} }))
@@ -40,7 +40,7 @@ export function getSpotifyUserTopTracks() {
   return (dispatch) => {
     return fetch(`${backendAPI}/spotify_user_top_tracks`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
     })
       .then(resp => resp.json())
       .then(data => {
@@ -52,7 +52,7 @@ export function getSpotifyUserTopArtists() {
   return (dispatch) => {
     return fetch(`${backendAPI}/spotify_user_top_artists`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
     })
       .then(resp => resp.json())
       .then(data => {
@@ -64,7 +64,7 @@ export function getSpotifyUserRecentTracks() {
   return (dispatch) => {
     return fetch(`${backendAPI}/spotify_user_recent_tracks`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
     })
       .then(resp => resp.json())
       .then(data => {
@@ -76,7 +76,7 @@ export function searchSpotifyTrack(trackData) {
   return (dispatch) => {
     return fetch(`${backendAPI}/spotify_search_track`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
       body: JSON.stringify({ search_term: trackData })
     })
       .then(resp => resp.json())
@@ -89,7 +89,7 @@ export function searchSpotifyArtist(artistData) {
   return (dispatch) => {
     return fetch(`${backendAPI}/spotify_search_artist`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
       body: JSON.stringify({ search_term: artistData })
     })
       .then(resp => resp.json())
@@ -103,7 +103,7 @@ export function getArtistTracks(artistId, artistName) {
   return (dispatch) => {
     return fetch(`${backendAPI}/spotify_artist_tracks`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
       body: JSON.stringify({ artistId: artistId, search_term: artistName })
     })
       .then(resp => resp.json())
@@ -117,7 +117,7 @@ export function searchSpotifyPlaylists(searchTerm) {
   return (dispatch) => {
     return fetch(`${backendAPI}/spotify_search_playlists`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
       body: JSON.stringify({ search_term: searchTerm })
     })
       .then(resp => resp.json())
@@ -130,7 +130,7 @@ export function getSpotifyFeaturedPlaylists() {
   return (dispatch) => {
     return fetch(`${backendAPI}/spotify_featured_playlists`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
     })
       .then(resp => resp.json())
       .then(data => {

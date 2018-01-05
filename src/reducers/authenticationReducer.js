@@ -8,7 +8,7 @@ export default (state = INITIAL_STATE, action) => {
     case (AUTHORIZE_USER):
       return  {...state, currentUser: action.payload.currentUser, isLoggedIn: true};
     case (UNAUTHORIZE_USER):
-      return {...state, currentUser: {}, isLoggedIn: false};
+      return INITIAL_STATE;
     case (GET_CURRENT_USER):
       return {...state, currentUser: action.payload.currentUser, isLoggedIn: true};
     case (ERROR):

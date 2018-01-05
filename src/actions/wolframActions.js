@@ -5,7 +5,7 @@ export function getWolframSearch(searchData, history) {
   return (dispatch) => {
     return fetch(`${backendAPI}/wolfram_search`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
       body: JSON.stringify({search_term: searchData})
     })
       .then(resp => resp.json())
@@ -17,7 +17,7 @@ export function favoriteWolfram(favoriteData) {
   return (dispatch) => {
     return fetch(`${backendAPI}/wolfram_favorite`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
       body: JSON.stringify( {wolfram_data: favoriteData })
     })
   }

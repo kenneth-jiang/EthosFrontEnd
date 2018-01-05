@@ -31,16 +31,26 @@ class WolframResults extends React.Component {
         <Grid.Column width={4}>
           {queryresult.sources !== undefined ?
             <div>
-              <h2 align="center">Sources</h2>
-              {queryresult.sources.map((source, index) => {
-                return (
-                  <li key={index}>
-                    <a href={source.url} onClick={() => this.props.addClickTerm(source.text)}>
-                      {source.text}
-                    </a>
-                  </li>
-                )
-              })}
+              {queryresult.sources.url !== undefined ?
+                <li>
+                  <a href={queryresult.sources.url} onClick={() => this.props.addClickTerm(queryresult.sources.text)}>
+                    {queryresult.sources.text}
+                  </a>
+                </li>
+              :
+                <div>
+                  <h2 align="center">Sources</h2>
+                  {queryresult.sources.map((source, index) => {
+                    return (
+                      <li key={index}>
+                        <a href={source.url} onClick={() => this.props.addClickTerm(source.text)}>
+                          {source.text}
+                        </a>
+                      </li>
+                    )
+                  })}
+                </div>
+              }
             </div>
           :
             null

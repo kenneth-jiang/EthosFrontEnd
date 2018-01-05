@@ -5,7 +5,7 @@ import { USER_MESSAGES } from './actionTypes';
 export function getAllMessages() {
   return (dispatch) => {
     return fetch(`${backendAPI}/all_messages`, {
-      headers: headers,
+      headers: headers(),
      })
       .then(resp => resp.json())
       .then(data => {
@@ -20,7 +20,7 @@ export function sendMessage(content, username, time, user_id) {
   return (dispatch) => {
     fetch(`${backendAPI}/send_message`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
       body: JSON.stringify({ content, username, time, user_id })
     })
   }

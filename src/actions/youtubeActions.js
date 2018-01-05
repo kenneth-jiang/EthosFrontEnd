@@ -5,7 +5,7 @@ export function searchYoutube(searchData) {
   return (dispatch) => {
     return fetch(`${backendAPI}/youtube_search`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
       body: JSON.stringify({search_term: searchData})
     })
       .then(resp => resp.json())
@@ -23,7 +23,7 @@ export function favoriteYoutube(favoriteData) {
   return (dispatch) => {
     return fetch(`${backendAPI}/youtube_favorite`, {
       method: 'POST',
-      headers: headers,
+      headers: headers(),
       body: JSON.stringify(favoriteData)
     })
   }
