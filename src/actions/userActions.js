@@ -1,4 +1,4 @@
-import { backendAPI, headers } from '../services/Adapter';
+import { backendAPI, headers } from '../services/adapter';
 import { GET_CURRENT_USER, GET_ALL_USERS, UPDATE_USER_INFO, GET_USER_FAVORITES } from './actionTypes';
 
 export function getCurrentUser() {

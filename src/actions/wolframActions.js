@@ -1,4 +1,4 @@
-import { backendAPI, headers } from '../services/Adapter';
+import { backendAPI, headers } from '../services/adapter';
 import { WOLFRAM_SEARCH } from './actionTypes';
 
 export function getWolframSearch(searchData, history) {

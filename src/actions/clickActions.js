@@ -1,4 +1,4 @@
-import { backendAPI, headers } from '../services/Adapter';
+import { backendAPI, headers } from '../services/adapter';
 
 export function addClickTerm(clickData) {
   return (dispatch) => {

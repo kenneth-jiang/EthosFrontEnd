@@ -1,4 +1,4 @@
-import { backendAPI, headers } from '../services/Adapter';
+import { backendAPI, headers } from '../services/adapter';
 import { USER_MESSAGES } from './actionTypes';
 
 

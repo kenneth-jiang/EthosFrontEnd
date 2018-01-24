@@ -1,4 +1,4 @@
-import { backendAPI, headers } from '../services/Adapter';
+import { backendAPI, headers } from '../services/adapter';
 import { YOUTUBE_SEARCH, VIEW_CURRENT_VIDEO } from './actionTypes';
 
 export function searchYoutube(searchData) {

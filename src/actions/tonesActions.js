@@ -1,4 +1,4 @@
-import { headers, backendAPI } from '../services/Adapter';
+import { headers, backendAPI } from '../services/adapter';
 import { GET_USER_TONES } from './actionTypes';
 
 

@@ -1,4 +1,4 @@
-import { backendAPI, headers } from '../services/Adapter';
+import { backendAPI, headers } from '../services/adapter';
 import { NEWS_SEARCH, SOURCE_SEARCH } from './actionTypes';
 
 export function searchNews(searchData, startDate, endDate) {

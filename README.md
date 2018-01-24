@@ -1273,16 +1273,16 @@ Alternatively you may use `yarn`:
 yarn add enzyme enzyme-adapter-react-16 react-test-renderer
 ```
 
-As of Enzyme 3, you will need to install Enzyme along with an Adapter corresponding to the version of React you are using. (The examples above use the adapter for React 16.)
+As of Enzyme 3, you will need to install Enzyme along with an adapter corresponding to the version of React you are using. (The examples above use the adapter for React 16.)
 
 The adapter will also need to be configured in your [global setup file](#initializing-test-environment):
 
 #### `src/setupTests.js`
 ```js
 import { configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import adapter from 'enzyme-adapter-react-16';
 
-configure({ adapter: new Adapter() });
+configure({ adapter: new adapter() });
 ```
 
 Now you can write a smoke test with it:

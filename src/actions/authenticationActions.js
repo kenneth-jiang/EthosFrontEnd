@@ -1,4 +1,4 @@
-import { backendAPI, headers } from '../services/Adapter';
+import { backendAPI, headers } from '../services/adapter';
 import { AUTHORIZE_USER, UNAUTHORIZE_USER, GET_CURRENT_USER, ERROR, GET_PROFILE_PIC } from './actionTypes';
 
 
