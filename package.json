@@ -18,6 +18,9 @@
     "semantic-ui-react": "^0.77.1",
     "watson-developer-cloud": "^3.0.3"
   },
+  "engines": {
+    "node": "6.11.2"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
