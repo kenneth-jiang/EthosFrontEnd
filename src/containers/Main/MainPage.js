@@ -82,7 +82,7 @@ class MainPage extends React.Component {
                 :
                 <Menu.Item>
                   <Icon name='reddit' />
-                  <a href="http://localhost:3001/api/v1/reddit_login">
+                  <a href="https://ethos-back-end.herokuapp.com/api/v1/reddit_login">
                     Log In To Reddit
                   </a>
                 </Menu.Item>
@@ -97,7 +97,7 @@ class MainPage extends React.Component {
                 :
                 <Menu.Item>
                   <Icon name='spotify' />
-                  <a href="http://localhost:3001/api/v1/spotify_login">
+                  <a href="https://ethos-back-end.herokuapp.com/api/v1/spotify_login">
                     Log In To Spotify
                   </a>
                 </Menu.Item>

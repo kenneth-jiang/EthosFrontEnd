@@ -10,8 +10,8 @@ class UserValues extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedBarChart: true,
-      selectedHorizontalChart: false,
+      selectedBarChart: false,
+      selectedHorizontalChart: true,
       selectedPolarChart: false,
       selectedRadarChart: false,
     }

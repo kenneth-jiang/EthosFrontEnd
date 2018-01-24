@@ -1,4 +1,4 @@
-export const backendAPI = 'http://localhost:3001/api/v1';
+export const backendAPI = 'https://ethos-back-end.herokuapp.com/api/v1';
 
 export const headers = () => {
   return {
