@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter, Switch, Route, Link } from 'react-router-dom';
+import { withRouter, Switch, Route, Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Sidebar, Segment, Menu, Icon } from 'semantic-ui-react';
 
@@ -43,61 +43,70 @@ class MainPage extends React.Component {
           <Sidebar.Pushable as={Segment} className="fulldisplay">
             <Sidebar className="fulldisplay" as={Menu} animation="scale down" width='thin' style={{border:"solid"}} visible={this.props.sidebar.toggleVisibility} icon='labeled' vertical inverted>
               <Menu.Item name='home'>
-                <Icon name='home' />
                 <Link to="/">
+                  <Icon name='home' size="big" />
+                  <br />
                   Main
                 </Link>
               </Menu.Item>
               <Menu.Item name='chat'>
-                <Icon name='comments' />
                 <Link to="/chat">
+                  <Icon name='comments' size="big" />
+                  <br />
                   Chat
                 </Link>
               </Menu.Item>
               <Menu.Item>
-                <Icon name="search" />
                 <Link to="/wolfram">
+                  <Icon name="search" size="big" />
+                  <br />
                   Wolfram
                 </Link>
               </Menu.Item>
               <Menu.Item>
-                <Icon name='newspaper' />
                 <Link to="/news">
+                  <Icon name='newspaper' size="big" />
+                  <br />
                   News
                 </Link>
               </Menu.Item>
               <Menu.Item>
-                <Icon name='youtube square' />
                 <Link to="/youtube">
+                  <Icon name='youtube square' size="big" />
+                  <br />
                   Youtube
                 </Link>
               </Menu.Item>
               {this.props.reddit.isLoggedIn ?
                 <Menu.Item>
-                  <Icon name='reddit' />
                   <Link to="/reddit">
+                    <Icon name='reddit' size="big" />
+                    <br />
                     Reddit
                   </Link>
                 </Menu.Item>
                 :
                 <Menu.Item>
-                  <Icon name='reddit' />
                   <a href="https://ethos-back-end.herokuapp.com/api/v1/reddit_login">
+                    <Icon name='reddit' size="big" />
+                    <br />
                     Log In To Reddit
                   </a>
                 </Menu.Item>
               }
               {this.props.spotify.isLoggedIn ?
                 <Menu.Item>
-                  <Icon name='spotify' />
                   <Link to="/spotify">
+                    <Icon name='spotify' size="big" />
+                    <br />
                     Spotify
                   </Link>
                 </Menu.Item>
                 :
                 <Menu.Item>
-                  <Icon name='spotify' />
                   <a href="https://ethos-back-end.herokuapp.com/api/v1/spotify_login">
+                    <Icon name='spotify' size="big" />
+                    <br />
                     Log In To Spotify
                   </a>
                 </Menu.Item>
@@ -115,7 +124,7 @@ class MainPage extends React.Component {
                   <Route path="/news" component={NewsPage} />
                   <Route path="/reddit" component={RedditPage} />
                   <Route path="/spotify" component={SpotifyPage} />
-                  <Route exact path="/" render={() => this.renderMainPage()} />
+                  <Route exact path="/" render={() => <Redirect to={`/user/${this.props.user.currentUser.user.id}`} />} />
                   <Route exact path="/tones" component={Tones} />
                   <Route component={NotFound} />
                 </Switch>
@@ -139,6 +148,7 @@ class MainPage extends React.Component {
 const mapStateToProps = (state) => {
   return {
     authentication: state.authentication,
+    user: state.user,
     sidebar: state.sidebar,
     reddit: state.reddit,
     spotify: state.spotify,

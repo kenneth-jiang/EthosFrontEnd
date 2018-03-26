@@ -29,7 +29,7 @@ class UserPreferences extends React.Component {
 
     return (
       <Grid columns="equal">
-        <Grid.Column width={2}>
+        <Grid.Column width={1}>
         </Grid.Column>
         <Grid.Column>
           <List>
@@ -51,7 +51,7 @@ class UserPreferences extends React.Component {
             </List.Content>
           </List>
         </Grid.Column>
-        <Grid.Column width={2}>
+        <Grid.Column width={1}>
         </Grid.Column>
       </Grid>
     )

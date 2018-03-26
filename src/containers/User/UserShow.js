@@ -72,18 +72,13 @@ class UserShow extends React.Component {
     return (
       <div>
         <Grid columns="equal">
-          <Grid.Column stretched width={12} align="right">
-            <Segment>
-              <Segment align="left">
-                {status}
-              </Segment>
-              <Form onSubmit={this.handleStatusSubmit}>
-                <Form.TextArea name="status" onChange={this.handleChange} value={this.state.status} placeholder='How are you feeling?' autoHeight rows={2} />
-                <Form.Button type="submit">Submit</Form.Button>
-              </Form>
-            </Segment>
+          <Grid.Column stretched width={13}>
+            {this.state.renderPersonality ? <Segment><UserPersonality /></Segment> : null}
+            {this.state.renderNeeds ? <Segment><UserNeeds /></Segment> : null}
+            {this.state.renderValues ? <Segment><UserValues /></Segment> : null}
+            {this.state.renderPreferences ? <Segment><UserPreferences /></Segment> : null}
           </Grid.Column>
-          <Grid.Column width={4}>
+          <Grid.Column width={3}>
             <Segment align="center">
               <Menu fluid vertical tabular='right'>
                 {this.state.updatePictureInput ?
@@ -117,10 +112,6 @@ class UserShow extends React.Component {
             </Segment>
           </Grid.Column>
         </Grid>
-        {this.state.renderPersonality ? <Segment><UserPersonality /></Segment> : null}
-        {this.state.renderNeeds ? <Segment><UserNeeds /></Segment> : null}
-        {this.state.renderValues ? <Segment><UserValues /></Segment> : null}
-        {this.state.renderPreferences ? <Segment><UserPreferences /></Segment> : null}
       </div>
     )
   }
