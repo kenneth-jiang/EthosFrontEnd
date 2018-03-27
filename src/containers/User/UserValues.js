@@ -18,15 +18,15 @@ class UserValues extends React.Component {
   }
 
   renderBarChart = () => {
-    const { personality } = this.props.personality.personalities;
-    const personalityNames = personality.map((personality) => personality.name);
-    const personalityScores = personality.map((personality) => (personality.raw_score * 100).toFixed(1));
-    const personalityPercentile = personality.map((personality) => (personality.percentile * 100).toFixed(1));
+    const { values } = this.props.personality.personalities;
+    const valueNames = values.map((value) => value.name);
+    const valueScores = values.map((value) => (value.raw_score * 100).toFixed(1));
+    const valuePercentile = values.map((value) => (value.percentile * 100).toFixed(1));
     const color = ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)']
     const borderColor = ['rgba(255,99,132,1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)']
 
     const data = {
-      labels: personalityNames,
+      labels: valueNames,
       datasets: [
         {
           label: "Scores",
@@ -35,7 +35,7 @@ class UserValues extends React.Component {
           borderWidth: 1,
           hoverBackgroundColor: color,
           hoverBorderColor: color,
-          data: personalityScores,
+          data: valueScores,
         },
         {
           label: "Percentile",
@@ -44,55 +44,12 @@ class UserValues extends React.Component {
           borderWidth: 1,
           hoverBackgroundColor: color,
           hoverBorderColor: color,
-          data: personalityPercentile,
+          data: valuePercentile,
         }
       ]
     }
     const options = {
       title: { display: true, text: 'Your Values', fontSize: 30 },
-      scales: {
-        yAxes: [{ ticks: { beginAtZero: true, min: 0, max: 100 } }],
-        xAxes: [{ ticks: { beginAtZero: true, min: 0, max: 100 } }]
-      },
-      legend: { display: true, position: 'right' }
-    }
-    return <Bar data={data} options={options} />
-  };
-
-  renderNormalTraitBarChart = (trait) => {
-    const { personality } = this.props.personality.personalities;
-    const filteredPersonality = personality.filter((personality) => personality.name === trait);
-    const personalityTraitNames = filteredPersonality.map((personality) => personality.children.map((child) => child.name))[0];
-    const personalityTraitScores = filteredPersonality.map((personality) => personality.children.map((child) => (child.raw_score * 100).toFixed(1)))[0];
-    const personalityTraitPercentile = filteredPersonality.map((personality) => personality.children.map((child) => (child.percentile * 100).toFixed(1)))[0];
-    const color = ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)', 'rgba(0,255,255, 0.2)','rgba(229, 253, 134, 0.5)', 'rgba(134, 212, 253, 0.47)', 'rgba(134, 140, 253, 0.47)', 'rgba(254, 200, 234, 0.5)', 'rgba(31, 35, 1, 0.15)']
-    const borderColor = ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)', 'rgba(0,255,255, 1)','rgba(229, 253, 134, 1)', 'rgba(134, 212, 253, 1)', 'rgba(134, 140, 253, 1)', 'rgba(254, 200, 234, 1.5)', 'rgba(31, 35, 1, 0.5)']
-
-    const data = {
-      labels: personalityTraitNames,
-      datasets: [
-        {
-          label: "Scores",
-          backgroundColor: color,
-          borderColor: borderColor,
-          borderWidth: 1,
-          hoverBackgroundColor: color,
-          hoverBorderColor: color,
-          data: personalityTraitScores,
-        },
-        {
-          label: "Percentile",
-          backgroundColor: color,
-          borderColor: borderColor,
-          borderWidth: 1,
-          hoverBackgroundColor: color,
-          hoverBorderColor: color,
-          data: personalityTraitPercentile,
-        }
-      ]
-    }
-    const options = {
-      title: { display: true, text: trait, fontSize: 30 },
       scales: {
         yAxes: [{ ticks: { beginAtZero: true, min: 0, max: 100 } }],
         xAxes: [{ ticks: { beginAtZero: true, min: 0, max: 100 } }]
