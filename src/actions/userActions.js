@@ -2,8 +2,6 @@ import { backendAPI, headers } from '../services/adapter';
 import { GET_CURRENT_USER, GET_ALL_USERS, UPDATE_USER_INFO, GET_USER_FAVORITES } from './actionTypes';
 
 export function getCurrentUser() {
-  console.log('current_user, headers, authorization', headers().Authorization);
-  console.log('localstorage', localStorage.getItem('token'));
   return (dispatch) => {
     return fetch(`${backendAPI}/current_user`, {
       headers: headers(),// this is correct, don't change it
